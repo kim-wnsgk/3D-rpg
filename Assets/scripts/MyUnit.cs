@@ -15,6 +15,7 @@ public class MyUnit : MonoBehaviour
     float vAxis;
     Vector3 moveVec;
     public Animator anim;
+    public GameObject obj;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class MyUnit : MonoBehaviour
         jump = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Move();
         RotateWithMouse();
@@ -69,19 +70,18 @@ public class MyUnit : MonoBehaviour
     {
         if (!jump && Input.GetKeyDown(KeyCode.Space))
         {
+            anim.SetTrigger("Jump");
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = true;
             Debug.Log(jump);
-
         // rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
     }
-        // 
-        // 
         
     
     void OnCollisionEnter(Collision collision)
     {
+        //땅에 닿으면 점프 초기화
         if (collision.gameObject.tag == "Ground")
         {
             jump = false;
