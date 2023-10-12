@@ -266,7 +266,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97765389}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.8
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -283,7 +283,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &97765394
 MonoBehaviour:
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 5
-  jumpPower: 5
+  jumpPower: 13
   anim: {fileID: 0}
   obj: {fileID: 1277944993}
 --- !u!4 &97765396 stripped
@@ -5764,7 +5764,7 @@ GameObject:
   - component: {fileID: 1281770975}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
