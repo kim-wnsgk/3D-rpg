@@ -17,7 +17,7 @@ public class MyUnit : MonoBehaviour
     Vector3 moveVec;
     public Animator anim;
     public GameObject obj;
-
+    public TrailRenderer trailRenderer;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -49,7 +49,18 @@ public class MyUnit : MonoBehaviour
         transform.position += moveVec * (isRun ? moveSpeed * 2f : moveSpeed) * Time.deltaTime;
 
         transform.LookAt(transform.position + moveVec);
+
+        // 달릴 때 트레일 렌더러 활성화/비활성화
+        if (isRun)
+        {
+            trailRenderer.emitting = true;
+        }
+        else
+        {
+            trailRenderer.emitting = false;
+        }
     }
+
 
 
 
