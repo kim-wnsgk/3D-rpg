@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,12 +18,8 @@ public class MyUnit : MonoBehaviour
     public Animator anim;
     public GameObject obj;
 
-    void Start()
+    void Awake()
     {
-        // character = GetComponent<CharacterController>();
-        // cameraTransform = Camera.main.transform;
-        // cameraTransform.parent = transform; // 카메라를 물체의 자식으로 설정
-        // cameraTransform.localPosition = new Vector3(0, 2, -5); // 카메라의 로컬 위치 조절
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         jump = false;
@@ -31,41 +28,31 @@ public class MyUnit : MonoBehaviour
     void Update()
     {
         Move();
-        RotateWithMouse();
         Jump();
-        
+
     }
 
-    void RotateWithMouse()
-    {
-        // float mouseX = Input.GetAxis("Mouse X");
-        // float mouseY = Input.GetAxis("Mouse Y");
-
-        // // 물체 회전
-        // Vector3 rotation = new Vector3(0, mouseX * rotationSpeed, 0);
-        // transform.Rotate(rotation);
-
-        // 카메라 회전
-        // cameraTransform.Rotate(-mouseY * rotationSpeed, 0, 0);
-
-        // // 물체와 카메라가 항상 같은 방향을 보도록 설정
-        // cameraTransform.LookAt(transform);
-    }
 
     void Move()
     {
-        anim.SetBool("Walk", moveVec != Vector3.zero);
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
-        // float moveX = Input.GetAxis("Horizontal");
-        // float moveZ = Input.GetAxis("Vertical");
-        moveVec = new Vector3(hAxis,0,vAxis).normalized;
-        transform.position += moveVec * moveSpeed * Time.deltaTime;
-        // Vector3 moveDirection = transform.TransformDirection(new Vector3(moveX, 0, moveZ));
-        // character.SimpleMove(moveDirection * moveSpeed);
+
+        bool isRun = Input.GetKey(KeyCode.LeftShift);
+
+        anim.SetBool("Walk", moveVec != Vector3.zero);
+
+        // Shift 버튼을 누르는 동안에만 달리기 애니메이션 활성화
+        anim.SetBool("Run", isRun);
+
+        moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        transform.position += moveVec * (isRun ? moveSpeed * 2f : moveSpeed) * Time.deltaTime;
+
         transform.LookAt(transform.position + moveVec);
-        
     }
+
+
+
     void Jump()
     {
         if (!jump && Input.GetKeyDown(KeyCode.Space))
@@ -74,11 +61,10 @@ public class MyUnit : MonoBehaviour
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = true;
             Debug.Log(jump);
-        // rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
     }
-        
-    
+
+    // 점프 연속으로 되지 않도록
     void OnCollisionEnter(Collision collision)
     {
         //땅에 닿으면 점프 초기화
