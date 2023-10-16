@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MyUnit : MonoBehaviour
 {
     public float moveSpeed = 10.0f; // 이동 속도
@@ -16,19 +17,28 @@ public class MyUnit : MonoBehaviour
     float vAxis;
     Vector3 moveVec;
     public Animator anim;
-    public GameObject obj;
     public TrailRenderer trailRenderer;
+
+    Attack equipWeapon;
+    private float fireDelay = 0.1f;
+    private bool isFireReady = false;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         jump = false;
+
+        equipWeapon = GetComponent<Attack>();
     }
 
     void Update()
     {
+
         Move();
+
         Jump();
+        Attack();
 
     }
 
@@ -59,10 +69,8 @@ public class MyUnit : MonoBehaviour
         {
             trailRenderer.emitting = false;
         }
+
     }
-
-
-
 
     void Jump()
     {
@@ -87,4 +95,21 @@ public class MyUnit : MonoBehaviour
         }
 
     }
+
+    void Attack()
+    {
+        // if (equipWeapon == null) //무기가 있을때만 실행되도록 장비체크
+        //     return;
+
+        fireDelay += Time.deltaTime; //공격딜레이에 시간을 더해줌
+        isFireReady = equipWeapon.rate < fireDelay; //공격가능 여부 확인
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) && isFireReady)
+        {
+            equipWeapon.Use(); //조건 충족시 Use 실행
+            anim.SetTrigger("Attack1");
+            fireDelay = 0; //공격딜레이
+        }
+    }
+
 }
