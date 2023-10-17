@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     public int damage;
     public float rate = 0.5f;
     public BoxCollider meleeArea;
-    public TrailRenderer trailEffect;
+    // public TrailRenderer trailEffect;
 
     // Start is called before the first frame update
     public void Use()
@@ -21,7 +21,7 @@ public class Attack : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         meleeArea.enabled = true;
-        trailEffect.enabled = true;
+        // trailEffect.enabled = true;
 
         yield return new WaitForSeconds(0.3f);
 
@@ -29,7 +29,7 @@ public class Attack : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
 
-        trailEffect.enabled = false;
+        // trailEffect.enabled = false;
 
         yield break;
     }
