@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MyUnit : MonoBehaviour
 {
     public float moveSpeed = 10.0f; // 이동 속도
@@ -9,6 +10,7 @@ public class MyUnit : MonoBehaviour
     // private CharacterController character; // 캐릭터 컨트롤러
     // private Transform cameraTransform; // 카메라의 Transform
     Rigidbody rigid;
+
     bool jump;
     public float jumpPower = 3f;
     float hAxis;
@@ -33,6 +35,7 @@ public class MyUnit : MonoBehaviour
         Move();
         RotateWithMouse();
         Jump();
+        
         
     }
 
@@ -86,8 +89,6 @@ public class MyUnit : MonoBehaviour
         {
             jump = false;
             Debug.Log(jump);
-
         }
-
     }
 }
