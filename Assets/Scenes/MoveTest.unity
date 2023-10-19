@@ -299,9 +299,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 5
+  rigid: {fileID: 0}
+  jump: 0
   jumpPower: 13
+  hAxis: 0
+  vAxis: 0
+  moveVec: {x: 0, y: 0, z: 0}
   anim: {fileID: 0}
   trailRenderer: {fileID: 97765398}
+  equipWeapon: {fileID: 0}
+  fireDelay: 0.1
+  isFireReady: 0
 --- !u!4 &97765396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5f065fc0f7ba2e46bdf65ecb12c4195, type: 3}
@@ -986,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5f065fc0f7ba2e46bdf65ecb12c4195, type: 3}
       propertyPath: m_Name
-      value: Walking
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5f065fc0f7ba2e46bdf65ecb12c4195, type: 3}
       propertyPath: m_TagString
@@ -6241,6 +6249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 112
   curHealth: 38
+  target: {fileID: 97765396}
 --- !u!1 &1284190809
 GameObject:
   m_ObjectHideFlags: 0

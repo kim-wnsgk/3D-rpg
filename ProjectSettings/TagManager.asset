@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - shop
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Enemy
   - EnemyDead
-  - 
+  - Player
   - 
   - 
   - 
