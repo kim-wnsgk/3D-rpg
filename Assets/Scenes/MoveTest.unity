@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 774ca4081d3044466ae972de6fb04d3b, type: 2}
 --- !u!1 &53044161
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,17 +299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 5
-  rigid: {fileID: 0}
-  jump: 0
-  jumpPower: 13
-  hAxis: 0
-  vAxis: 0
-  moveVec: {x: 0, y: 0, z: 0}
-  anim: {fileID: 0}
+  jumpPower: 3
+  anim: {fileID: 97765401}
   trailRenderer: {fileID: 97765398}
-  equipWeapon: {fileID: 0}
-  fireDelay: 0.1
-  isFireReady: 0
 --- !u!4 &97765396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5f065fc0f7ba2e46bdf65ecb12c4195, type: 3}
@@ -434,6 +426,11 @@ MonoBehaviour:
   damage: 0
   rate: 0.5
   meleeArea: {fileID: 1728440008}
+--- !u!95 &97765401 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a5f065fc0f7ba2e46bdf65ecb12c4195, type: 3}
+  m_PrefabInstance: {fileID: 512565076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &297904450
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +585,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!64 &370806721
 MeshCollider:
@@ -6250,6 +6247,7 @@ MonoBehaviour:
   maxHealth: 112
   curHealth: 38
   target: {fileID: 97765396}
+  isNav: 0
 --- !u!1 &1284190809
 GameObject:
   m_ObjectHideFlags: 0
