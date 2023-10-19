@@ -11,10 +11,10 @@ public class enemy : MonoBehaviour
     Rigidbody rigid;
     BoxCollider boxCollider;
     Material mat;
-
     NavMeshAgent nav;   
-
+    public bool isNav;
     void Awake(){
+        isNav = false;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         // mat = GetComponentInChildren<MeshRenderer>().material;
@@ -25,10 +25,15 @@ public class enemy : MonoBehaviour
     }
     void Update()
     {
+        if(isNav){
         nav.SetDestination(target.position);     
+        }
         
     }
     void OnTriggerEnter(Collider other){
+        if(other.tag == "Player"){
+            isNav = true;
+        }
         // if(other.tag == "Melee"){
         //     Weapon weapon = other.GetComponent<Weapon>();
         //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
@@ -44,6 +49,13 @@ public class enemy : MonoBehaviour
         //     StartCoroutine(OnDamage());
         // }
     }
+    void OnTriggerExit(Collider other){
+        if(other.tag == "Player"){
+            isNav=false;
+        }
+    }
+        
+    
     // Start is called before the first frame update
     IEnumerator OnDamage(Vector3 reactVec){
         mat.color = Color.red;
