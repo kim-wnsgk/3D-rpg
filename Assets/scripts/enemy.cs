@@ -12,23 +12,32 @@ public class enemy : MonoBehaviour
     BoxCollider boxCollider;
     Material mat;
     NavMeshAgent nav;   
+    public Animator anim;
     public bool isNav;
+    
     void Awake(){
+        anim = GetComponent<Animator>();
         isNav = false;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         // mat = GetComponentInChildren<MeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();    
     }
-    void State(){
+    void Start(){
         curHealth = maxHealth;
     }
     void Update()
     {
+        onTrace();
+    }
+    void onTrace(){
         if(isNav){
-        nav.SetDestination(target.position);     
+            nav.SetDestination(target.position);
+            anim.SetBool("isWalk",true);
         }
-        
+        else{
+            anim.SetBool("isWalk",false);
+        }
     }
     void OnTriggerEnter(Collider other){
         if(other.tag == "Player"){
@@ -63,8 +72,10 @@ public class enemy : MonoBehaviour
 
         if(curHealth<0){
             mat.color = Color.white;
+            anim.SetTrigger("doDie");
         }
         else{
+            anim.SetTrigger("doDamage");
             mat.color = Color.gray;
             gameObject.layer = 7;
             Destroy(gameObject,4);
