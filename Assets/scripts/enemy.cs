@@ -12,9 +12,12 @@ public class enemy : MonoBehaviour
     BoxCollider boxCollider;
     Material mat;
     NavMeshAgent nav;
+    public Animator anim;
     public bool isNav;
+
     void Awake()
     {
+        anim = GetComponent<Animator>();
         isNav = false;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
@@ -27,18 +30,25 @@ public class enemy : MonoBehaviour
             nav.enabled = false; // 초기에 비활성화
         }
     }
-    void State()
+    void Start()
     {
         curHealth = maxHealth;
     }
     void Update()
     {
-        if (isNav && nav != null)
+        onTrace();
+    }
+    void onTrace()
+    {
+        if (isNav)
         {
-            nav.enabled = true; // isNav가 true일 때 NavMeshAgent 활성화
             nav.SetDestination(target.position);
+            anim.SetBool("isWalk", true);
         }
-
+        else
+        {
+            anim.SetBool("isWalk", false);
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -82,9 +92,11 @@ public class enemy : MonoBehaviour
         if (curHealth < 0)
         {
             mat.color = Color.white;
+            anim.SetTrigger("doDie");
         }
         else
         {
+            anim.SetTrigger("doDamage");
             mat.color = Color.gray;
             gameObject.layer = 7;
             Destroy(gameObject, 4);
