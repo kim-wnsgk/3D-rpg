@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    public int damage;
-    public float rate = 0.5f;
+    public int damage = 1;
+    public float rate = 1f;
     public BoxCollider meleeArea;
     // public TrailRenderer trailEffect;
 
     // Start is called before the first frame update
     public void Use()
     {
-        // StopCoroutine("Swing");
+        StopCoroutine(Swing());
         StartCoroutine(Swing());
     }
 
