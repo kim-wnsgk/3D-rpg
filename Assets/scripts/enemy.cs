@@ -14,6 +14,7 @@ public class enemy : MonoBehaviour
     NavMeshAgent nav;   
     public Animator anim;
     public bool isNav;
+    private Vector3 originalPosition;
     
     void Awake(){
         anim = GetComponent<Animator>();
@@ -25,19 +26,32 @@ public class enemy : MonoBehaviour
     }
     void Start(){
         curHealth = maxHealth;
+        originalPosition = transform.position;
     }
     void Update()
     {
+        //몬스터 삭제 테스트
+        // if(curHealth<=0){
+        //     Destroy(gameObject);
+        // }
         onTrace();
+        float distance = Vector3.Distance(transform.position, originalPosition);
+        if(distance<0.5f){
+            anim.SetBool("isWalk",false);
+        }
     }
     void onTrace(){
         if(isNav){
             nav.SetDestination(target.position);
             anim.SetBool("isWalk",true);
         }
-        else{
-            anim.SetBool("isWalk",false);
-        }
+    }
+    void FixedUpdate(){
+        FreezeVelocity();
+    }
+    void FreezeVelocity(){
+        rigid.angularVelocity = Vector3.zero;
+        rigid.velocity = Vector3.zero;
     }
     void OnTriggerEnter(Collider other){
         if(other.tag == "Player"){
@@ -61,6 +75,7 @@ public class enemy : MonoBehaviour
     void OnTriggerExit(Collider other){
         if(other.tag == "Player"){
             isNav=false;
+            nav.SetDestination(originalPosition);
         }
     }
         
@@ -70,9 +85,10 @@ public class enemy : MonoBehaviour
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
-        if(curHealth<0){
+        if(curHealth<=0){
             mat.color = Color.white;
             anim.SetTrigger("doDie");
+             StartCoroutine(DestroyAfterAnimation());
         }
         else{
             anim.SetTrigger("doDamage");
@@ -84,4 +100,9 @@ public class enemy : MonoBehaviour
             rigid.AddForce(reactVec *5,ForceMode.Impulse);
         }
     }
+    IEnumerator DestroyAfterAnimation()
+{
+    yield return new WaitForSeconds(3f); // 5초를 원하는 시간으로 변경할 수 있습니다.
+    Destroy(gameObject);
+}
 }

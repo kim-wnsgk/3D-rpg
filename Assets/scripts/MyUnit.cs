@@ -31,6 +31,9 @@ using System;
 
          equipWeapon = GetComponent<Attack>();
      }
+     void Start(){
+        Physics.IgnoreLayerCollision(0,6);
+     }
 
      void Update()
      {
