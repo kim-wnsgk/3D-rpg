@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - shop
   - Enemy
+  - Melee
+  - Item
   layers:
   - Default
   - TransparentFX
