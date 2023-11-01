@@ -64,6 +64,16 @@ public class Player : MonoBehaviour
         Swap();
     }
 
+    void FixedUpdate()
+    {
+        FreezeRotation();
+    }
+
+    void FreezeRotation()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+
     void GetInput()
     {
         hAxis = Input.GetAxisRaw("Horizontal");

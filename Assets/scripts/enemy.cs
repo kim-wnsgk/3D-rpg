@@ -21,7 +21,7 @@ public class enemy : MonoBehaviour
         isNav = false;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        // mat = GetComponentInChildren<MeshRenderer>().material;
+        mat = GetComponent<MeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();
 
         // NavMeshAgent 컴포넌트가 연결되어 있는지 확인
@@ -63,8 +63,8 @@ public class enemy : MonoBehaviour
             curHealth -= weapon.damage;
 
             Debug.Log("curHealth: " + curHealth);
-            // Vector3 reactVec = transform.position - other.transform.position;
-            // StartCoroutine(OnDamage());
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
         }
         // else if(other.tag == "magic"){
         //     Magic magic = other.GetComponent<Magic>();
@@ -89,17 +89,17 @@ public class enemy : MonoBehaviour
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
-        if (curHealth < 0)
+        if (curHealth > 0)
         {
+            anim.SetTrigger("doDamage");
             mat.color = Color.white;
-            anim.SetTrigger("doDie");
         }
         else
         {
-            anim.SetTrigger("doDamage");
+            anim.SetTrigger("doDie");
             mat.color = Color.gray;
             gameObject.layer = 7;
-            Destroy(gameObject, 4);
+            Destroy(gameObject, 2);
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
             rigid.AddForce(reactVec * 5, ForceMode.Impulse);
