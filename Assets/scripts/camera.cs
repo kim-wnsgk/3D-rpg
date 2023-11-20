@@ -11,21 +11,21 @@ public class Camera : MonoBehaviour
         transform.position = target.position + offset;
     }
     void LateUpdate()
-{
-    // Player는 싱글톤이기에 전역적으로 접근할 수 있습니다.
-    Vector3 direction = (target.position - transform.position).normalized;
-    RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
-                        1 << LayerMask.NameToLayer("EnvironmentObject"));
-
-    for (int i = 0; i < hits.Length; i++)
     {
-      TransparentObject[] obj = hits[i].transform.GetComponentsInChildren<TransparentObject>();
+        // Player는 싱글톤이기에 전역적으로 접근할 수 있습니다.
+        Vector3 direction = (target.position - transform.position).normalized;
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
+                            1 << LayerMask.NameToLayer("EnvironmentObject"));
 
-        for (int j = 0; j < obj.Length; j++)
+        for (int i = 0; i < hits.Length; i++)
         {
-            obj[j]?.BecomeTransparent();
+            TransparentObject[] obj = hits[i].transform.GetComponentsInChildren<TransparentObject>();
+
+            for (int j = 0; j < obj.Length; j++)
+            {
+                obj[j]?.BecomeTransparent();
+            }
         }
     }
-}
-    
+
 }
