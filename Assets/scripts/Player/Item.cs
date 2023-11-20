@@ -6,7 +6,7 @@ using UnityEngine.UIElements.Experimental;
 
 public class Item : MonoBehaviour
 {
-    public enum Type { Weapon, Coin, Exp, Heart, Grenade }
+    public enum Type { Weapon, Coin, Exp, Heart, Mana, Grenade }
     public Type type;
     public int value;
 

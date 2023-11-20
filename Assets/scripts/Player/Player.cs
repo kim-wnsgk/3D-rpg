@@ -14,9 +14,11 @@ public class Player : MonoBehaviour
 
     public int coin;
     public int health;
+    public int mana;
     public int hasGrenades;
     public int maxCoin;
     public int maxHealth;
+    public int maxMana;
     public int maxHasGrenades;
 
     Rigidbody rigid;
@@ -190,6 +192,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // 나중에 이부분을 트리거가 아닌 함수로 변경
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Item")
@@ -206,6 +209,11 @@ public class Player : MonoBehaviour
                     health += item.value;
                     if (health > maxHealth)
                         health = maxHealth;
+                    break;
+                case Item.Type.Mana:
+                    mana += item.value;
+                    if (mana > maxMana)
+                        mana = maxMana;
                     break;
                 case Item.Type.Grenade:
                     hasGrenades += item.value;
