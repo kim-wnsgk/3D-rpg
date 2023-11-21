@@ -19,6 +19,8 @@ using System;
      public Animator anim;
      public TrailRenderer trailRenderer;
 
+     bool isBorder;
+
     //  Attack equipWeapon;
      private float fireDelay = 0.1f;
      private bool isFireReady = false;

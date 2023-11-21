@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     bool ctrlDown;
     bool eDown;
     bool qDown;
+    bool isBorder;
 
     Vector3 moveVec;
     public Animator anim;
@@ -69,8 +70,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         FreezeRotation();
+        StopToWall();
     }
-
+    void StopToWall()
+    {
+        Debug.DrawRay(transform.position, transform.forward*5, Color.green);
+        isBorder = Physics.Raycast(transform.position, transform.forward, 3, LayerMask.GetMask("Wall"));
+    }
     void FreezeRotation()
     {
         rigid.angularVelocity = Vector3.zero;
@@ -102,7 +108,8 @@ public class Player : MonoBehaviour
         anim.SetBool("Run", isRun);
 
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-        transform.position += moveVec * (isRun ? moveSpeed * 2f : moveSpeed) * Time.deltaTime;
+        if(!isBorder)
+            transform.position += moveVec * (isRun ? moveSpeed * 2f : moveSpeed) * Time.deltaTime;
 
         transform.LookAt(transform.position + moveVec);
 
