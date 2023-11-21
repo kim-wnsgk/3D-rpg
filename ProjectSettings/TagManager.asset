@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Melee
   - Item
+  - EnemyWeapon
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - EnemyDead
   - Player
   - EnvironmentObject
-  - 
+  - EnemyWeapon
   - 
   - 
   - 
