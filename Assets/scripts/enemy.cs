@@ -15,6 +15,7 @@ public class enemy : MonoBehaviour
     public Animator anim;
     public bool isNav;
     private Vector3 originalPosition;
+    public int damage;
     
     void Awake(){
         anim = GetComponent<Animator>();
