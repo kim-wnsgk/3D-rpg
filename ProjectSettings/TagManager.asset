@@ -10,6 +10,7 @@ TagManager:
   - Melee
   - Item
   - EnemyWeapon
+  - Stage
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - EnvironmentObject
   - EnemyWeapon
   - Wall
-  - 
+  - Stage
   - 
   - 
   - 
