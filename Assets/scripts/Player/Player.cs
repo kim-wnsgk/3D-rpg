@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
     }
     void StopToWall()
     {
-        Debug.DrawRay(transform.position, transform.forward*5, Color.green);
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
         isBorder = Physics.Raycast(transform.position, transform.forward, 3, LayerMask.GetMask("Wall"));
     }
     void FreezeRotation()
@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
         anim.SetBool("Run", isRun);
 
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-        if(!isBorder)
+        if (!isBorder)
             transform.position += moveVec * (isRun ? moveSpeed * 2f : moveSpeed) * Time.deltaTime;
 
         transform.LookAt(transform.position + moveVec);
@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
             Debug.Log(isJump);
 
         }
+
 
     }
 
@@ -229,6 +230,13 @@ public class Player : MonoBehaviour
                     break;
             }
             Destroy(other.gameObject);
+        }
+        if (other.tag == "Enemy")
+        {
+            enemy enemy = other.GetComponent<enemy>();
+            health -= enemy.damage;
+            Debug.Log(enemy.damage);
+            Debug.Log(health);
         }
     }
 
