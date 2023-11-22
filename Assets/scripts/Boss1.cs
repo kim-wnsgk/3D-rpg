@@ -23,6 +23,7 @@ public class Boss1 : MonoBehaviour
     Vector3 jumpVec;
     bool isLook;
     bool isDead;
+    public bool angry;
     
     void Awake(){
         anim = GetComponent<Animator>();
@@ -34,44 +35,63 @@ public class Boss1 : MonoBehaviour
         //범위 안에 들면 하게 해야할수도
     }
     void Start(){
-        curHealth = maxHealth;
-        originalPosition = transform.position;
-        isLook = true;
+        if(angry){
+            curHealth = maxHealth;
+            originalPosition = transform.position;
+            isLook = true;
+        }
     }
     void Update()
-    {
-        if(isDead){
-            StopAllCoroutines();
-            return;
-        }
-        if(isLook){
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-            lookVec = new Vector3(h, 0, v)* 5f;
-            transform.LookAt(target.position + lookVec);
-        }
-        onTrace();
-        float distance = Vector3.Distance(transform.position, originalPosition);
-        if(distance<0.5f){
-            anim.SetBool("isWalk",false);
+    {       
+        if(angry){
+                if(isDead){
+                    StopAllCoroutines();
+                    return;
+                }
+                if(isLook){
+                    float h = Input.GetAxisRaw("Horizontal");
+                    float v = Input.GetAxisRaw("Vertical");
+                    lookVec = new Vector3(h, 0, v)* 5f;
+                    transform.LookAt(target.position + lookVec);
+                }
+                onTrace();
+                float distance = Vector3.Distance(transform.position, originalPosition);
+                if(distance<0.5f){
+                    anim.SetBool("isWalk",false);
+                }
         }
     }
     void onTrace(){
-        if(isNav){
-            nav.SetDestination(target.position);
-            anim.SetBool("isWalk",true);
-        }
-        else{
-             nav.isStopped = true;
-             anim.SetBool("isWalk",false);
+        if(angry){
+            if(isNav){
+                nav.SetDestination(target.position);
+                anim.SetBool("isWalk",true);
+            }
+            else{
+                nav.isStopped = true;
+                anim.SetBool("isWalk",false);
+            }
         }
         
     }
     void OnTriggerEnter(Collider other){
-        if(other.tag == "Player"){
-            isNav = true;
-            StartCoroutine(Think());
+        if(angry){
+            if(other.tag == "Player"){
+                isNav = true;
+                    StartCoroutine(Think());
+            }
         }
+    }
+
+    void OnTriggerExit(Collider other){
+        if(angry){
+            if(other.tag == "Player"){
+                isNav=false;
+                StopAllCoroutines();
+            }
+        }
+
+    }
     void FixedUpdate(){
         FreezeVelocity();
     }
@@ -93,13 +113,13 @@ public class Boss1 : MonoBehaviour
         //     Vector3 reactVec = transform.position - other.transform.position;
         //     StartCoroutine(OnDamage());
         // }
-    }
-    void OnTriggerExit(Collider other){
-        if(other.tag == "Player"){
-            isNav=false;
-            nav.SetDestination(originalPosition);
-        }
-    }
+    
+    // void OnTriggerExit(Collider other){
+    //     if(other.tag == "Player"){
+    //         isNav=false;
+    //         nav.SetDestination(originalPosition);
+    //     }
+    // }
         
     
     // Start is called before the first frame update
@@ -183,8 +203,7 @@ public class Boss1 : MonoBehaviour
         GameObject instantMissile = Instantiate(missile, missilePort.position,missilePort.rotation);
         BossMissile bossMissile = instantMissile.GetComponent<BossMissile>();
         bossMissile.target = target;
-        yield return new WaitForSeconds (1f);//애니메이션에 맞게 수정
-        
+        yield return new WaitForSeconds (2f);//애니메이션에 맞게 수정
         isNav=true;
         StartCoroutine(Think());
     }
