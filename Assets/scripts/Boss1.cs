@@ -78,9 +78,17 @@ public class Boss1 : MonoBehaviour
         if(angry){
             if(other.tag == "Player"){
                 isNav = true;
-                    StartCoroutine(Think());
+                StartCoroutine(Think());
             }
         }
+    void FixedUpdate(){
+        FreezeVelocity();
+    }
+    void FreezeVelocity(){
+        rigid.angularVelocity = Vector3.zero;
+        rigid.velocity = Vector3.zero;
+    }
+        
     }
 
     void OnTriggerExit(Collider other){
@@ -92,13 +100,7 @@ public class Boss1 : MonoBehaviour
         }
 
     }
-    void FixedUpdate(){
-        FreezeVelocity();
-    }
-    void FreezeVelocity(){
-        rigid.angularVelocity = Vector3.zero;
-        rigid.velocity = Vector3.zero;
-    }
+    
         // if(other.tag == "Melee"){
         //     Weapon weapon = other.GetComponent<Weapon>();
         //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
@@ -156,7 +158,7 @@ public class Boss1 : MonoBehaviour
                     StartCoroutine(MissileShot());
                     break;
                 case 2:
-                    StartCoroutine(Walk());
+                    StartCoroutine(Jump());
                     break;
                 case 3:
                     //일반 공격
@@ -175,7 +177,8 @@ public class Boss1 : MonoBehaviour
                     break;
                 case 1:
                     //미사일 발사 패턴
-                    StartCoroutine(MissileShot());
+                    StartCoroutine(Walk());
+                    // StartCoroutine(MissileShot());
                     break;
                 case 2:
                     StartCoroutine(Walk());
@@ -190,10 +193,6 @@ public class Boss1 : MonoBehaviour
                     break;
             }
         }
-        
-        
-        
-        
     }
     IEnumerator MissileShot()
     {   
@@ -230,7 +229,7 @@ IEnumerator Jump()
     yield return new WaitForSeconds(0.5f);
     MeleeArea.enabled = false;
 
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(4f);
     isLook = true;
     boxCollider.enabled = true;
     StartCoroutine(Think());

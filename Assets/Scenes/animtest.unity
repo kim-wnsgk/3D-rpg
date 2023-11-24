@@ -13776,6 +13776,67 @@ MonoBehaviour:
   spawnArea: 3
   maxMonster: 5
   isGameOver: 0
+--- !u!1001 &1675962793
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000035762787
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.78
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_Name
+      value: Peasant Girl
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7c5d597c678f6c74d80092d2096a91d3, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3faf7da27417db2429b81b7ddec4f913, type: 3}
 --- !u!1001 &1685763933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16717,6 +16778,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5595050479768731633, guid: 7990402ffaaa71f49a39cea1874608d2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.79
+      objectReference: {fileID: 0}
     - target: {fileID: 6224616172227961015, guid: 7990402ffaaa71f49a39cea1874608d2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -16739,7 +16804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6224616172227961015, guid: 7990402ffaaa71f49a39cea1874608d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.8637285
+      value: 17.31
       objectReference: {fileID: 0}
     - target: {fileID: 6224616172227961015, guid: 7990402ffaaa71f49a39cea1874608d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16828,3 +16893,4 @@ SceneRoots:
   - {fileID: 1659212315}
   - {fileID: 1628522733}
   - {fileID: 6761119334410105377}
+  - {fileID: 1675962793}

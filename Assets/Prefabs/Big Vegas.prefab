@@ -164,6 +164,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.21
       objectReference: {fileID: 0}
+    - target: {fileID: -7183977164078860115, guid: accf5a600eea6416aba9167120b1d0bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.92
+      objectReference: {fileID: 0}
     - target: {fileID: -7121769801107515815, guid: accf5a600eea6416aba9167120b1d0bf, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -668,3 +672,4 @@ MonoBehaviour:
   target: {fileID: 0}
   anim: {fileID: 0}
   isNav: 0
+  angry: 0
