@@ -6692,7 +6692,6 @@ MonoBehaviour:
   curHealth: 38
   target: {fileID: 97765396}
   anim: {fileID: 97765405}
-  isNav: 0
   damage: 0
 --- !u!1 &1284190809
 GameObject:
@@ -7051,7 +7050,7 @@ PrefabInstance:
     - target: {fileID: 4563106639138214646, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 97765396}
+      objectReference: {fileID: 1589167050}
     - target: {fileID: 4563106639138214646, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
       propertyPath: curHealth
       value: 10
@@ -7062,6 +7061,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
+--- !u!4 &1589167050 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4710200394072765341, guid: 47508982dcded0d42aa47630eebc2d6d, type: 3}
+  m_PrefabInstance: {fileID: 1437162512230359107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1603721605
 GameObject:
   m_ObjectHideFlags: 0
@@ -8091,6 +8095,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1828524027927493507, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828524027927493507, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -8187,6 +8195,10 @@ PrefabInstance:
       value: 0.2821832
       objectReference: {fileID: 0}
     - target: {fileID: 3474740885571698429, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3474740885571698429, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
       propertyPath: m_Center.x
       value: 0.09169038
       objectReference: {fileID: 0}
@@ -8200,7 +8212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3474740885571698429, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3518694351175196109, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
       propertyPath: m_Layer

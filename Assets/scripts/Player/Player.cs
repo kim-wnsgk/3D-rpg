@@ -132,7 +132,6 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Jump");
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
-            Debug.Log(isJump);
         }
     }
 
@@ -143,7 +142,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isJump = false;
-            Debug.Log(isJump);
 
         }
 
@@ -231,7 +229,7 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))  // 공격중이지 않을때만 데미지 (무기가 player의 children이라서 이거 안하면 무기에 닿아도 플레이어 데미지입어서..)
         {
             enemy enemy = other.GetComponent<enemy>();
             health -= enemy.damage;

@@ -11,21 +11,21 @@ public class enemy : MonoBehaviour
     Rigidbody rigid;
     NavMeshAgent nav;
     public Animator anim;
-    public bool isNav;
+    // public bool isNav;
     private Vector3 originalPosition;
     public int damage;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
-        isNav = false;
+        // isNav = false;
         rigid = GetComponent<Rigidbody>();
-        nav = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
         curHealth = maxHealth;
         originalPosition = transform.position;
+        nav = GetComponent<NavMeshAgent>();
     }
     void Update()
     {
@@ -53,22 +53,22 @@ public class enemy : MonoBehaviour
         anim.SetBool("isWalk", true);
         // }
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         // if (other.tag == "Player")
         // {
         //     isNav = true;
         // }
 
-        if (other.tag == "Melee")
+        if (other.gameObject.tag == "Melee")
         {
-            Weapon weapon = other.GetComponent<Weapon>();
+            Weapon weapon = other.gameObject.GetComponent<Weapon>();
             if (weapon != null)
             {
                 curHealth -= weapon.damage;
                 Debug.Log(curHealth);
                 Vector3 reactVec = transform.position - other.transform.position;
-                StartCoroutine(OnDamage(reactVec));
+                OnDamage(reactVec);
             }
         }
         // else if(other.tag == "magic"){
@@ -91,9 +91,9 @@ public class enemy : MonoBehaviour
 
 
     // Start is called before the first frame update
-    IEnumerator OnDamage(Vector3 reactVec)
+    private void OnDamage(Vector3 reactVec)
     {
-        yield return new WaitForSeconds(0.1f);
+        // yield return new WaitForSeconds(0.1f);
 
         if (curHealth < 0)
         {
