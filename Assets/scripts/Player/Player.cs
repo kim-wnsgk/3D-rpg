@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
         if (other.tag == "Enemy" && equipWeapon)  // 공격
         {
             enemy enemy = other.GetComponent<enemy>();
-            enemy.curHealth -= equipWeapon.damage;
+            enemy.curHealth -= (equipWeapon.damage + level);  // 레벨에 따라 추가데미지
             Debug.Log("Enemy's health : " + enemy.curHealth);
 
             if (enemy.curHealth > 0)  // 적이 죽지 않고 공격 당할때
@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
 
     void handleExp()
     {
-        if (exp >= 100)
+        if (exp >= 100 + level * 10)  // 레벨 * 10% 의 가중치를 둔다
         {
             level++;
             exp = 0;

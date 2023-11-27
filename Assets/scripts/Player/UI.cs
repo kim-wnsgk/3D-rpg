@@ -44,7 +44,7 @@ public class UI : MonoBehaviour
 
     private void HandleExpBar()
     {
-        expbar.value = (float)player.exp / (float)100f;
+        expbar.value = (float)player.exp / (float)(100f + player.level * 10);
         exp.text = player.level.ToString() + " Level";
     }
 }
