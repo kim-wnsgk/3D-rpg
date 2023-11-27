@@ -14,6 +14,8 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI hp;
     public Slider mpbar;
     public TextMeshProUGUI mp;
+    public Slider expbar;
+    public TextMeshProUGUI exp;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class UI : MonoBehaviour
     {
         HandleHpBar();
         HandleMpBar();
+        HandleExpBar();
     }
 
     private void HandleHpBar()
@@ -37,5 +40,11 @@ public class UI : MonoBehaviour
     {
         mpbar.value = (float)player.mana / (float)player.maxMana;
         mp.text = player.mana.ToString();
+    }
+
+    private void HandleExpBar()
+    {
+        expbar.value = (float)player.exp / (float)100f;
+        exp.text = player.level.ToString() + " Level";
     }
 }

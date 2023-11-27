@@ -14,6 +14,7 @@ public class enemy : MonoBehaviour
     // public bool isNav;
     private Vector3 originalPosition;
     public int damage;
+    public int exp;
 
     void Awake()
     {
@@ -57,14 +58,15 @@ public class enemy : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Debug.Log("아야!");
             Weapon weapon = other.GetComponentInChildren<Weapon>();
-            if (weapon != null)
+            Player player = other.GetComponent<Player>();
+            if (weapon != null && weapon.damage != 0)
             {
-                curHealth -= weapon.damage;
+                curHealth -= (weapon.damage + player.level);
                 Debug.Log("enemy's health : " + curHealth);
                 Vector3 reactVec = transform.position - other.transform.position;
                 StartCoroutine(OnDamage(reactVec));
-                Player player = other.GetComponent<Player>();
                 player.health += damage;
             }
         }

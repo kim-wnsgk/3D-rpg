@@ -15,11 +15,11 @@ public class Player : MonoBehaviour
     public int coin;
     public int health;
     public int mana;
-    public int hasGrenades;
-    public int maxCoin;
     public int maxHealth;
     public int maxMana;
-    public int maxHasGrenades;
+    public int exp;
+    public int level;
+
 
     Rigidbody rigid;
     bool isJump;
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
         // equipWeapon = weapons[0];
         // equipWeapon.SetActive(true);  // 첫번째 무기 기본 설정
+        level = 1;
 
     }
 
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
         Attack();
         Interaction();
         Swap();
+        handleExp();
     }
 
     void FixedUpdate()
@@ -208,8 +210,6 @@ public class Player : MonoBehaviour
             {
                 case Item.Type.Coin:
                     coin += item.value;
-                    if (coin > maxCoin)
-                        coin = maxCoin;
                     break;
                 case Item.Type.Heart:
                     health += item.value;
@@ -221,20 +221,35 @@ public class Player : MonoBehaviour
                     if (mana > maxMana)
                         mana = maxMana;
                     break;
-                case Item.Type.Grenade:
-                    hasGrenades += item.value;
-                    if (hasGrenades > maxHasGrenades)
-                        hasGrenades = maxHasGrenades;
-                    break;
             }
             Destroy(other.gameObject);
         }
-        if (other.tag == "Enemy" && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))  // 공격중이지 않을때만 데미지 (무기가 player의 children이라서 이거 안하면 무기에 닿아도 플레이어 데미지입어서..)
+        if (other.tag == "Enemy" && equipWeapon)  // 공격
+        {
+            enemy enemy = other.GetComponent<enemy>();
+            enemy.curHealth -= equipWeapon.damage;
+            Debug.Log("Enemy's health : " + enemy.curHealth);
+
+            if (enemy.curHealth > 0)  // 적이 죽지 않고 공격 당할때
+            {
+                enemy.anim.SetTrigger("doDamage");
+                // enemy.transform.position = enemy.transform.position.normalized;
+                enemy.transform.position += Vector3.up * 10;
+
+            }
+            else  // 적이 죽으면
+            {
+                enemy.anim.SetTrigger("doDie");
+                Destroy(enemy.gameObject, 2);
+                exp += enemy.exp;  // 경험치 쌓임
+            }
+        }
+
+        if (other.tag == "Enemy" && isFireReady)  // 공격 당하면
         {
             enemy enemy = other.GetComponent<enemy>();
             health -= enemy.damage;
-            Debug.Log(enemy.damage);
-            Debug.Log(health);
+            Debug.Log("Player's health : " + health);
         }
     }
 
@@ -252,6 +267,16 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Attack1");
             fireDelay = 0; //공격딜레이
         }
+    }
+
+    void handleExp()
+    {
+        if (exp >= 100)
+        {
+            level++;
+            exp = 0;
+        }
+
     }
 
 }
