@@ -53,60 +53,42 @@ public class enemy : MonoBehaviour
         anim.SetBool("isWalk", true);
         // }
     }
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
-        // if (other.tag == "Player")
-        // {
-        //     isNav = true;
-        // }
-
-        if (other.gameObject.tag == "Melee")
+        if (other.tag == "Player")
         {
-            Weapon weapon = other.gameObject.GetComponent<Weapon>();
+            Weapon weapon = other.GetComponentInChildren<Weapon>();
             if (weapon != null)
             {
                 curHealth -= weapon.damage;
-                Debug.Log(curHealth);
+                Debug.Log("enemy's health : " + curHealth);
                 Vector3 reactVec = transform.position - other.transform.position;
-                OnDamage(reactVec);
+                StartCoroutine(OnDamage(reactVec));
+                Player player = other.GetComponent<Player>();
+                player.health += damage;
             }
         }
-        // else if(other.tag == "magic"){
-        //     Magic magic = other.GetComponent<Magic>();
-        //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
-        //     curHealth -= magic.damage;
-        //     Vector3 reactVec = transform.position - other.transform.position;
-        //     StartCoroutine(OnDamage());
-        // }
     }
-
-    // void OnTriggerExit(Collider other)
-    // {
-    //     if (other.tag == "Player")
-    //     {
-    //         isNav = false;
-    //         nav.SetDestination(originalPosition);
-    //     }
-    // }
 
 
     // Start is called before the first frame update
-    private void OnDamage(Vector3 reactVec)
+    IEnumerator OnDamage(Vector3 reactVec)
     {
-        // yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);
 
-        if (curHealth < 0)
-        {
-            anim.SetTrigger("doDie");
-            Destroy(gameObject, 4);
-        }
-        else
+        if (curHealth > 0)
         {
             anim.SetTrigger("doDamage");
             gameObject.layer = 7;
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
             rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+
+        }
+        else
+        {
+            anim.SetTrigger("doDie");
+            Destroy(gameObject, 4);
         }
     }
 }

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int damage = 1;
+    public int originDamage = 1;
+    public int damage = 0;
     public float rate = 1f;
     public BoxCollider meleeArea;
     // public TrailRenderer trailEffect;
 
-    // Start is called before the first frame update
+    void Start()
+    {
+        damage = 0;
+    }
     public void Use()
     {
         StopCoroutine(Swing());
@@ -18,6 +22,7 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Swing()
     {
+        damage = originDamage;
         yield return new WaitForSeconds(0.1f);
 
         meleeArea.enabled = true;
@@ -27,10 +32,11 @@ public class Weapon : MonoBehaviour
 
         meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
 
         // trailEffect.enabled = false;
-
+        damage = 0;
         yield break;
+
     }
 }
