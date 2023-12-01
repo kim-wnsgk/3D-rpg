@@ -236,11 +236,15 @@ public class Player : MonoBehaviour
                 // enemy.transform.position = enemy.transform.position.normalized;
                 enemy.transform.position += Vector3.up * 10;
 
+                // 적을 뒤로 밀기
+                Vector3 attackDirection = other.transform.position - transform.position;
+                attackDirection.y = 0;  // 수직 방향은 무시
+                enemy.rigid.AddForce(attackDirection.normalized * 50, ForceMode.Impulse);
             }
             else  // 적이 죽으면
             {
                 enemy.anim.SetTrigger("doDie");
-                Destroy(enemy.gameObject, 2);
+                Destroy(enemy.gameObject, 1);
                 exp += enemy.exp;  // 경험치 쌓임
             }
         }

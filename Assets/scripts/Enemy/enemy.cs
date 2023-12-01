@@ -8,7 +8,7 @@ public class enemy : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public Transform target;
-    Rigidbody rigid;
+    public Rigidbody rigid;
     NavMeshAgent nav;
     public Animator anim;
     // public bool isNav;
