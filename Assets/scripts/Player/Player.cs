@@ -40,10 +40,13 @@ public class Player : MonoBehaviour
 
     GameObject nearObject;
     Weapon equipWeapon;
-    private float fireDelay = 0.4f;
+    private float fireDelay = 1f;
     private bool isFireReady = true;
 
     int weaponIndex = -1;
+    private int comboStack = 0;
+    float lastComboTime = 0;
+    float maxComboDelay = 1.5f;
 
     void Awake()
     {
@@ -261,15 +264,36 @@ public class Player : MonoBehaviour
     {
         if (equipWeapon == null) //무기가 있을때만 실행되도록 장비체크
             return;
-
         fireDelay += Time.deltaTime; //공격딜레이에 시간을 더해줌
         isFireReady = equipWeapon.rate < fireDelay; //공격가능 여부 확인
 
-        if (ctrlDown && isFireReady)
+        // if (ctrlDown && isFireReady)
+        // {
+        //     equipWeapon.Use(); //조건 충족시 Use 실행
+        //     anim.SetTrigger("Attack1");
+        //     fireDelay = 0; //공격딜레이
+        // }
+        if(Time.time - lastComboTime > maxComboDelay || comboStack>2)
         {
-            equipWeapon.Use(); //조건 충족시 Use 실행
-            anim.SetTrigger("Attack1");
-            fireDelay = 0; //공격딜레이
+            comboStack = 0;
+        }
+        if(ctrlDown && isFireReady)
+        {
+            Debug.Log(comboStack);
+            lastComboTime = Time.time;
+            comboStack++;
+            if(comboStack ==1)
+            {
+                anim.SetTrigger("combo1");
+            }
+            else if(comboStack ==2)
+            {
+                anim.SetTrigger("combo2");
+            }
+            else{
+                anim.SetTrigger("combo3");
+            }
+            fireDelay = 0;
         }
     }
 
