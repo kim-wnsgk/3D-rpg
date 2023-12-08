@@ -12,7 +12,7 @@ public class enemy : MonoBehaviour
     public Rigidbody rigid;
     NavMeshAgent nav;
     public Animator anim;
-    // public bool isNav;
+    public bool isNav;
     private Vector3 originalPosition;
     public int damage;
     public int exp;
@@ -20,9 +20,11 @@ public class enemy : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
-        // isNav = false;
+        isNav = false;
         rigid = GetComponent<Rigidbody>();
         hpBar = transform.Find("HpBar/Canvas/HPFront").GetComponent<Image>();
+        GameObject obj2 = GameObject.FindWithTag("Player");
+        target = obj2.transform;
     }
     void Start()
     {
@@ -56,11 +58,14 @@ public class enemy : MonoBehaviour
     }
     void onTrace()
     {
-        // if (isNav)
-        // {
-        nav.SetDestination(target.position);
-        anim.SetBool("isWalk", true);
-        // }
+        if (isNav)
+        {
+            nav.SetDestination(target.position);
+            anim.SetBool("isWalk", true);
+        }
+        else{
+            nav.SetDestination(originalPosition);
+        }
     }
     void OnTriggerEnter(Collider other)
     {
