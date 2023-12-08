@@ -279,6 +279,7 @@ public class Player : MonoBehaviour
         }
         if(ctrlDown && isFireReady)
         {
+            equipWeapon.Use();
             Debug.Log(comboStack);
             lastComboTime = Time.time;
             comboStack++;
