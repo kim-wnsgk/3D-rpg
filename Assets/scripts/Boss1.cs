@@ -24,10 +24,12 @@ public class Boss1 : MonoBehaviour
     bool isLook;
     bool isDead;
     public bool angry;
+    bool already;
     
     void Awake(){
         anim = GetComponent<Animator>();
         isNav = false;
+        already = false;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<CapsuleCollider>();
         // mat = GetComponentInChildren<MeshRenderer>().material;
@@ -76,8 +78,9 @@ public class Boss1 : MonoBehaviour
     }
     void OnTriggerEnter(Collider other){
         if(angry){
-            if(other.tag == "Player"){
+            if(other.tag == "Player" && already == false){
                 isNav = true;
+                already = true;
                 StartCoroutine(Think());
             }
         }
@@ -177,8 +180,8 @@ public class Boss1 : MonoBehaviour
                     break;
                 case 1:
                     //미사일 발사 패턴
-                    StartCoroutine(Walk());
-                    // StartCoroutine(MissileShot());
+                    // StartCoroutine(Walk());
+                    StartCoroutine(MissileShot());
                     break;
                 case 2:
                     StartCoroutine(Walk());
