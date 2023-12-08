@@ -6,6 +6,10 @@ public class Camera : MonoBehaviour
 {
     public Transform target;
     public Vector3 offset;
+    void Awake(){
+        GameObject obj2 = GameObject.FindWithTag("Player");
+        target = obj2.transform;
+    }
     void Update()
     {
         transform.position = target.position + offset;
