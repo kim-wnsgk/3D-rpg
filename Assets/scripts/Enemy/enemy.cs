@@ -39,6 +39,7 @@ public class enemy : MonoBehaviour
         {
             anim.SetBool("isWalk", false);
         }
+        hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
 
     }
     void SetHPBar(){
@@ -84,7 +85,6 @@ public class enemy : MonoBehaviour
     IEnumerator OnDamage(Vector3 reactVec)
     {
         yield return new WaitForSeconds(0.1f);
-        hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
         if (curHealth > 0)
         {
             anim.SetTrigger("doDamage");
