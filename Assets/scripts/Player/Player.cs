@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+
     public float moveSpeed = 10.0f; // 이동 속도
     public GameObject[] weapons;  // Weapons들 저장
     public bool[] hasWeapons;  // 해당 인덱스 weapon 갖고 있는지
@@ -58,6 +60,8 @@ public class Player : MonoBehaviour
         // equipWeapon.SetActive(true);  // 첫번째 무기 기본 설정
         level = 1;
 
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

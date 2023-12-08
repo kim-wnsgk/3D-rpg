@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class MoveStage : MonoBehaviour
 {
 
+    public void school()
+    {
+        SceneManager.LoadScene("school");
+    }
     public void Move1()
     {
         SceneManager.LoadScene("Stage1");
