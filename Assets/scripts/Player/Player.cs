@@ -61,7 +61,20 @@ public class Player : MonoBehaviour
         level = 1;
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // 현재 씬에서 플레이어가 두 개 이상인 경우 파괴
+        if (players.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+
+        // 중복이 아니라면 플레이어 태그를 추가하고 다음 씬으로 이동
+        else
+        {
+            gameObject.tag = "Player";
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Update()
