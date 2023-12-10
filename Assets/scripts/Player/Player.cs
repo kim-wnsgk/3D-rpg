@@ -282,6 +282,9 @@ public class Player : MonoBehaviour
             enemy enemy = other.GetComponent<enemy>();
             health -= enemy.damage;
             Debug.Log("Player's health : " + health);
+            Vector3 attackDirection = transform.position - other.transform.position;
+            // attackDirection.y = 0;  // 수직 방향은 무시
+            rigid.AddForce(attackDirection.normalized * 70, ForceMode.Impulse);
         }
     }
 
@@ -298,25 +301,26 @@ public class Player : MonoBehaviour
         //     anim.SetTrigger("Attack1");
         //     fireDelay = 0; //공격딜레이
         // }
-        if(Time.time - lastComboTime > maxComboDelay || comboStack>2)
+        if (Time.time - lastComboTime > maxComboDelay || comboStack > 2)
         {
             comboStack = 0;
         }
-        if(ctrlDown && isFireReady)
+        if (ctrlDown && isFireReady)
         {
             equipWeapon.Use();
             Debug.Log(comboStack);
             lastComboTime = Time.time;
             comboStack++;
-            if(comboStack ==1)
+            if (comboStack == 1)
             {
                 anim.SetTrigger("combo1");
             }
-            else if(comboStack ==2)
+            else if (comboStack == 2)
             {
                 anim.SetTrigger("combo2");
             }
-            else{
+            else
+            {
                 anim.SetTrigger("combo3");
             }
             fireDelay = 0;
