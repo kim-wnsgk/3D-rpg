@@ -298,10 +298,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  curHealth: 0
+  curHealth: 1
   target: {fileID: 0}
+  rigid: {fileID: 0}
   anim: {fileID: 0}
   isNav: 0
+  damage: 2
+  exp: 310
 --- !u!195 &6952435950531796883
 NavMeshAgent:
   m_ObjectHideFlags: 0

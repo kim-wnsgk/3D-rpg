@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -87,6 +88,13 @@ public class Player : MonoBehaviour
         Interaction();
         Swap();
         handleExp();
+
+        // 플레이어가 죽으면 경험치 0으로 만들고 메인맵으로 이동
+        if (health <= 0)
+        {
+            exp = 0;
+            SceneManager.LoadScene("school");
+        }
     }
 
     void FixedUpdate()
@@ -244,7 +252,7 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        if (other.tag == "Enemy" && equipWeapon)  // 공격
+        if (other.tag == "Enemy" && equipWeapon && !isFireReady)  // 공격
         {
             enemy enemy = other.GetComponent<enemy>();
             enemy.curHealth -= (equipWeapon.damage + level);  // 레벨에 따라 추가데미지

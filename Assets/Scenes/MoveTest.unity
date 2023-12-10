@@ -7856,6 +7856,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4563106639138214646, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
+      propertyPath: rigid
+      value: 
+      objectReference: {fileID: 1934089047}
+    - target: {fileID: 4563106639138214646, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
       propertyPath: damage
       value: 1
       objectReference: {fileID: 0}
@@ -8770,6 +8774,11 @@ Canvas:
 --- !u!4 &1934089043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3528368347808510241, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
+  m_PrefabInstance: {fileID: 1512617738}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1934089047 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1067770491013777023, guid: 0fe01c7cf281c47a58c42f4fead76665, type: 3}
   m_PrefabInstance: {fileID: 1512617738}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1942643790
