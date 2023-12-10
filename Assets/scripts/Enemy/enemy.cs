@@ -59,8 +59,9 @@ public class enemy : MonoBehaviour
         hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
 
     }
-    void SetHPBar(){
-         hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+    void SetHPBar()
+    {
+        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
     void FixedUpdate()
     {
@@ -78,20 +79,28 @@ public class enemy : MonoBehaviour
             nav.SetDestination(target.position);
             anim.SetBool("isWalk", true);
         }
-        else{
+        else
+        {
             nav.SetDestination(originalPosition);
         }
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Melee")
+        Weapon weapon = other.GetComponent<Weapon>();
+        if (weapon != null)
         {
-            Weapon weapon = other.GetComponent<Weapon>();
-            curHealth -= (weapon.damage + player.level);
+            curHealth -= weapon.damage;
+            curHealth -= player.level;
             Debug.Log(player.level + "아야!" + curHealth);
             Vector3 reactVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
+        // 그렇지 않으면 (Weapon 컴포넌트가 존재하지 않거나 other가 null인 경우)
+        // else
+        // {
+        //     // 원하는 처리를 수행하거나 디버그 메시지 출력
+        //     Debug.LogError("Weapon component not found on the collided object.");
+        // }
     }
 
 
