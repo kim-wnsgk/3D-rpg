@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int originDamage = 1;
-    public int damage = 0;
-    public float rate = 1f;
+    // public int originDamage = 1;
+    public int damage = 2;
+    public float rate = 0.5f;
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
 
     void Start()
     {
-        damage = 0;
+        // damage = 0;
     }
     public void Use()
     {
@@ -22,20 +22,20 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Swing()
     {
-        damage = originDamage;
-        yield return new WaitForSeconds(0.1f);
+        // damage = originDamage;
+        // yield return new WaitForSeconds(0.1f);
 
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         trailEffect.enabled = false;
 
         meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
-        damage = 0;
+        // damage = 0;
         yield break;
 
     }

@@ -17,6 +17,8 @@ public class enemy : MonoBehaviour
     public int damage;
     public int exp;
     private Image hpBar;
+
+    public Player player;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -25,6 +27,19 @@ public class enemy : MonoBehaviour
         hpBar = transform.Find("HpBar/Canvas/HPFront").GetComponent<Image>();
         GameObject obj2 = GameObject.FindWithTag("Player");
         target = obj2.transform;
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
+        if (players.Length > 0)
+        {
+            player = players[0].GetComponent<Player>();
+        }
+        else
+        {
+            // players 배열이 비어있는 경우, 원하는 처리를 수행하거나 예외 처리를 추가할 수 있습니다.
+            Debug.LogError("Player not found in the scene.");
+        }
     }
     void Start()
     {
@@ -69,19 +84,13 @@ public class enemy : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Melee")
         {
-            Debug.Log("아야!");
-            Weapon weapon = other.GetComponentInChildren<Weapon>();
-            Player player = other.GetComponent<Player>();
-            if (weapon != null && weapon.damage != 0)
-            {
-                curHealth -= (weapon.damage + player.level);
-                Debug.Log("enemy's health : " + curHealth);
-                Vector3 reactVec = transform.position - other.transform.position;
-                StartCoroutine(OnDamage(reactVec));
-                player.health += damage;
-            }
+            Weapon weapon = other.GetComponent<Weapon>();
+            curHealth -= (weapon.damage + player.level);
+            Debug.Log(player.level + "아야!" + curHealth);
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
         }
     }
 
@@ -96,13 +105,13 @@ public class enemy : MonoBehaviour
             gameObject.layer = 7;
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+            rigid.AddForce(reactVec * 200, ForceMode.Impulse);
 
         }
         else
         {
             anim.SetTrigger("doDie");
-            Destroy(gameObject, 4);
+            Destroy(gameObject, 1);
         }
     }
 }
