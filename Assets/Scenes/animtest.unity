@@ -847,6 +847,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 29
+  player: {fileID: 0}
 --- !u!54 &107150345
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1503,6 +1505,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 15
+  player: {fileID: 0}
 --- !u!65 &175384681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1778,6 +1782,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 11
+  player: {fileID: 0}
 --- !u!65 &188928970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2037,6 +2043,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 2
+  player: {fileID: 0}
 --- !u!65 &190948247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2425,6 +2433,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 31
+  player: {fileID: 0}
 --- !u!54 &217363379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3212,6 +3222,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 0
+  player: {fileID: 0}
 --- !u!95 &368297778
 Animator:
   serializedVersion: 5
@@ -4597,6 +4609,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dcc7344671ccf0044a1fb5038007860e, type: 2}
+    - target: {fileID: 4172548373923416433, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
+      propertyPath: enemyIndex
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1793610149684699187, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
     - {fileID: 1938843591045609620, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
@@ -6238,6 +6254,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 21
+  player: {fileID: 0}
 --- !u!54 &641661611
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7320,6 +7338,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 0
+  player: {fileID: 0}
 --- !u!95 &745766218
 Animator:
   serializedVersion: 5
@@ -8454,6 +8474,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 0
+  player: {fileID: 0}
 --- !u!65 &810106833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8581,6 +8603,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 14
+  player: {fileID: 0}
 --- !u!65 &839839584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8844,6 +8868,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 22
+  player: {fileID: 0}
 --- !u!54 &851059318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9140,6 +9166,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 17
+  player: {fileID: 0}
 --- !u!4 &873554269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
@@ -9902,6 +9930,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 0
+  player: {fileID: 0}
 --- !u!65 &917663620
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10282,6 +10312,10 @@ PrefabInstance:
     - target: {fileID: 95457531584545886, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172548373923416433, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
+      propertyPath: enemyIndex
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1793610149684699187, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
@@ -10920,6 +10954,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 26
+  player: {fileID: 0}
 --- !u!65 &992687442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11408,6 +11444,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 0
+  player: {fileID: 0}
 --- !u!4 &1033947164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4788319935855200, guid: 0f8a471e5537f864ebdb454fe82308eb, type: 3}
@@ -11727,6 +11765,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 19
+  player: {fileID: 0}
 --- !u!65 &1049164076
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12781,6 +12821,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 27
+  player: {fileID: 0}
 --- !u!65 &1122354567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17939,6 +17981,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 0
+  player: {fileID: 0}
 --- !u!4 &1187946987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
@@ -19480,6 +19524,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 18
+  player: {fileID: 0}
 --- !u!65 &1312196043
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21011,6 +21057,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 35
+  player: {fileID: 0}
 --- !u!54 &1449123532
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22674,6 +22722,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 30
+  player: {fileID: 0}
 --- !u!54 &1593766067
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23289,6 +23339,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 33
+  player: {fileID: 0}
 --- !u!54 &1647014139
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24302,6 +24354,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2cc3d51c3b46bec4a95b1cf2d2488afd, type: 2}
+    - target: {fileID: 4172548373923416433, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
+      propertyPath: enemyIndex
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1938843591045609620, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
     - {fileID: 1793610149684699187, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
@@ -24699,6 +24755,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 34
+  player: {fileID: 0}
 --- !u!54 &1744900047
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25013,6 +25071,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 13
+  player: {fileID: 0}
 --- !u!65 &1746400575
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25970,6 +26030,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 10
+  player: {fileID: 0}
 --- !u!4 &1839085440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 178560101459360467, guid: a48631e259d0486fa83621f7d8f36e72, type: 3}
@@ -26525,6 +26587,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 9
+  player: {fileID: 0}
 --- !u!65 &1896030099
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26646,6 +26710,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 23
+  player: {fileID: 0}
 --- !u!54 &1901665899
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27010,6 +27076,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 3
+  player: {fileID: 0}
 --- !u!65 &1926835506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28099,6 +28167,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 25
+  player: {fileID: 0}
 --- !u!4 &2058499262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 458774, guid: 8252519d2c6fd014bb5f75765a8c4fda, type: 3}
@@ -28199,6 +28269,8 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
+  enemyIndex: 1
+  player: {fileID: 0}
 --- !u!4 &2066864348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 535702951195797787, guid: 35f16650380449c78eeac51057eaff2a, type: 3}
