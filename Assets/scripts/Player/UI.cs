@@ -31,7 +31,7 @@ public class UI : MonoBehaviour
             // players 배열이 비어있는 경우, 원하는 처리를 수행하거나 예외 처리를 추가할 수 있습니다.
             Debug.LogError("Player not found in the scene.");
         }
-        hpbar = transform.Find("FrontHealthBar").GetComponent<Image>();
+        hpbar = transform.Find("Health/FrontHealthBar").GetComponent<Image>();
         mpbar = transform.Find("FrontManaBar").GetComponent<Image>();
         hpbar = transform.Find("FrontXpBar").GetComponent<Image>();
     }
