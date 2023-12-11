@@ -208,17 +208,17 @@ public class Player : MonoBehaviour
 
     void Interaction()
     {
-        if (eDown && nearObject != null && !isJump)
-        {
-            if (nearObject.tag == "Melee")
-            {
-                Item item = nearObject.GetComponent<Item>();
-                int weaponIndex = item.value;
-                hasWeapons[weaponIndex] = true;  // 해당 무기는 소유한 상태가 됨
+        // if (eDown && nearObject != null && !isJump)
+        // {
+        //     if (nearObject.tag == "Melee")
+        //     {
+        //         Item item = nearObject.GetComponent<Item>();
+        //         int weaponIndex = item.value;
+        //         hasWeapons[weaponIndex] = true;  // 해당 무기는 소유한 상태가 됨
 
-                Destroy(nearObject);
-            }
-        }
+        //         Destroy(nearObject);
+        //     }
+        // }
     }
     void OnTriggerStay(Collider other)
     {
@@ -231,27 +231,27 @@ public class Player : MonoBehaviour
     // 나중에 이부분을 트리거가 아닌 함수로 변경
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Item")
-        {
-            Item item = other.GetComponent<Item>();
-            switch (item.type)
-            {
-                case Item.Type.Coin:
-                    coin += item.value;
-                    break;
-                case Item.Type.Heart:
-                    health += item.value;
-                    if (health > maxHealth)
-                        health = maxHealth;
-                    break;
-                case Item.Type.Mana:
-                    mana += item.value;
-                    if (mana > maxMana)
-                        mana = maxMana;
-                    break;
-            }
-            Destroy(other.gameObject);
-        }
+        // if (other.tag == "Item")
+        // {
+        //     Item item = other.GetComponent<Item>();
+        //     switch (item.type)
+        //     {
+        //         case Item.Type.Coin:
+        //             coin += item.value;
+        //             break;
+        //         case Item.Type.Heart:
+        //             health += item.value;
+        //             if (health > maxHealth)
+        //                 health = maxHealth;
+        //             break;
+        //         case Item.Type.Mana:
+        //             mana += item.value;
+        //             if (mana > maxMana)
+        //                 mana = maxMana;
+        //             break;
+        //     }
+        //     Destroy(other.gameObject);
+        // }
         // if (other.tag == "Enemy" && equipWeapon && !isFireReady)  // 공격
         // {
         //     enemy enemy = other.GetComponent<enemy>();

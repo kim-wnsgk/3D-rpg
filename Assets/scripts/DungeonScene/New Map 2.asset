@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddafd0b9a85d144eaddb506126da2d9, type: 3}
+  m_Name: New Map 2
+  m_EditorClassIdentifier: 
+  levelIndex: 2
+  DungeonName: "\uBCD1\uC6D02"
+  LevelText: 16
+  difficulty: 16
+  DungeonEx: "\uD3B8\uC548\uD55C \uD558\uB8E83"
+  nameColor: {r: 1, g: 1, b: 1, a: 0}
+  sceneToLoad: {fileID: 102900000, guid: 4729ea42f36b8a4438aea4c90dc85f9e, type: 3}

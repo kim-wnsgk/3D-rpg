@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a67ee28b6adf441814e60bcb404307, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  id: 84cd419cec43b33439bf3d2ec1a618d1
+  ItemName: "\uAC11\uC637"
+  Icon: {fileID: 21300000, guid: d659f7396cd57754eba78763cf986c51, type: 3}
+  MaximumStacks: 1
+  StrengthBonus: 1
+  DexterityBonus: 1
+  HPandMPBonus: 1
+  DamageBonus: 1
+  StrengthPercentBonus: 0.1
+  DexterityPercentBonus: 0.1
+  HPandMPPercentBonus: 0.1
+  DamagePercentBonus: 0.1
+  EquipmentType: 1
