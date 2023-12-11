@@ -12,7 +12,7 @@ public class Stage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.tag == "Player")
         {
             popupObject.SetActive(true);
         }
@@ -20,7 +20,7 @@ public class Stage : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.tag == "Player")
         {
             popupObject.SetActive(false);
         }
