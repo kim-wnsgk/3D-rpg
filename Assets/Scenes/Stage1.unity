@@ -909,7 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: []
-  monsterPrefab: {fileID: 3372847055157577832, guid: 618b5e68b63c243e1871368b7b6c601a, type: 3}
+  monsterPrefab: {fileID: 2767266857647809633, guid: a6bb4b89ab9e644389ac4cad2eb0e751, type: 3}
   createTime: 5
   spawnArea: 3
   maxMonster: 5

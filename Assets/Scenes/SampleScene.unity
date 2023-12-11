@@ -15461,7 +15461,12 @@ MonoBehaviour:
       items:
       - {fileID: 11400000, guid: 285774c1f504c424b895a14ec10042be, type: 2}
       amount: 3
-    killObjectives: []
+    killObjectives:
+    - Inventory: {fileID: 2127495294}
+      title: test
+      key: 1
+      items: []
+      amount: 10
   - title: Helath2
     key: Q_HEALTH2
     character: {fileID: 1270496387}
@@ -22974,7 +22979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &1270496382
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -28340,6 +28345,10 @@ PrefabInstance:
     - target: {fileID: 2141425906225707654, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2141425906225707654, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2187012325960713667, guid: 90fad9c02607de24fa36c7fbf9472c93, type: 3}
       propertyPath: m_Layer
