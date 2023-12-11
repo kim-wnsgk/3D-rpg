@@ -847,7 +847,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 29
+  enemyIndex: 33
   player: {fileID: 0}
 --- !u!54 &107150345
 Rigidbody:
@@ -2433,7 +2433,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 31
+  enemyIndex: 35
   player: {fileID: 0}
 --- !u!54 &217363379
 Rigidbody:
@@ -8474,7 +8474,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 0
+  enemyIndex: 27
   player: {fileID: 0}
 --- !u!65 &810106833
 BoxCollider:
@@ -9930,7 +9930,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 0
+  enemyIndex: 26
   player: {fileID: 0}
 --- !u!65 &917663620
 BoxCollider:
@@ -10954,7 +10954,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 26
+  enemyIndex: 30
   player: {fileID: 0}
 --- !u!65 &992687442
 BoxCollider:
@@ -12821,7 +12821,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 27
+  enemyIndex: 31
   player: {fileID: 0}
 --- !u!65 &1122354567
 BoxCollider:
@@ -17981,7 +17981,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 0
+  enemyIndex: 25
   player: {fileID: 0}
 --- !u!4 &1187946987 stripped
 Transform:
@@ -21057,7 +21057,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 35
+  enemyIndex: 39
   player: {fileID: 0}
 --- !u!54 &1449123532
 Rigidbody:
@@ -22722,7 +22722,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 30
+  enemyIndex: 34
   player: {fileID: 0}
 --- !u!54 &1593766067
 Rigidbody:
@@ -23339,7 +23339,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 33
+  enemyIndex: 37
   player: {fileID: 0}
 --- !u!54 &1647014139
 Rigidbody:
@@ -24755,7 +24755,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 34
+  enemyIndex: 38
   player: {fileID: 0}
 --- !u!54 &1744900047
 Rigidbody:
@@ -28167,7 +28167,7 @@ MonoBehaviour:
   isNav: 0
   damage: 0
   exp: 0
-  enemyIndex: 25
+  enemyIndex: 29
   player: {fileID: 0}
 --- !u!4 &2058499262 stripped
 Transform:
