@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             exp = 0;
+            health = 100;
             SceneManager.LoadScene("school");
         }
     }
@@ -252,30 +253,30 @@ public class Player : MonoBehaviour
         //     }
         //     Destroy(other.gameObject);
         // }
-        // if (other.tag == "Enemy" && equipWeapon && !isFireReady)  // 공격
-        // {
-        //     enemy enemy = other.GetComponent<enemy>();
-        //     enemy.curHealth -= (equipWeapon.damage + level);  // 레벨에 따라 추가데미지
-        //     Debug.Log("Enemy's health : " + enemy.curHealth);
+        if (other.tag == "Enemy" && equipWeapon && !isFireReady)  // 공격
+        {
+            enemy enemy = other.GetComponent<enemy>();
+            enemy.curHealth -= (equipWeapon.damage + level);  // 레벨에 따라 추가데미지
+            Debug.Log("Enemy's health : " + enemy.curHealth);
 
-        //     if (enemy.curHealth > 0)  // 적이 죽지 않고 공격 당할때
-        //     {
-        //         enemy.anim.SetTrigger("doDamage");
-        //         // enemy.transform.position = enemy.transform.position.normalized;
-        //         enemy.transform.position += Vector3.up * 10;
+            if (enemy.curHealth > 0)  // 적이 죽지 않고 공격 당할때
+            {
+                enemy.anim.SetTrigger("doDamage");
+                // enemy.transform.position = enemy.transform.position.normalized;
+                enemy.transform.position += Vector3.up * 10;
 
-        //         // 적을 뒤로 밀기
-        //         Vector3 attackDirection = other.transform.position - transform.position;
-        //         attackDirection.y = 0;  // 수직 방향은 무시
-        //         enemy.rigid.AddForce(attackDirection.normalized * 50, ForceMode.Impulse);
-        //     }
-        //     else  // 적이 죽으면
-        //     {
-        //         enemy.anim.SetTrigger("doDie");
-        //         Destroy(enemy.gameObject, 1);
-        //         exp += enemy.exp;  // 경험치 쌓임
-        //     }
-        // }
+                // 적을 뒤로 밀기
+                Vector3 attackDirection = other.transform.position - transform.position;
+                attackDirection.y = 0;  // 수직 방향은 무시
+                enemy.rigid.AddForce(attackDirection.normalized * 50, ForceMode.Impulse);
+            }
+            else  // 적이 죽으면
+            {
+                enemy.anim.SetTrigger("doDie");
+                Destroy(enemy.gameObject, 0);
+                exp += enemy.exp;  // 경험치 쌓임
+            }
+        }
 
         if (other.tag == "Enemy")  // 공격 당하면
         {
@@ -308,7 +309,7 @@ public class Player : MonoBehaviour
         if (ctrlDown && isFireReady)
         {
             equipWeapon.Use();
-            Debug.Log(comboStack);
+            // Debug.Log(comboStack);
             lastComboTime = Time.time;
             comboStack++;
             if (comboStack == 1)

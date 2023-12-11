@@ -23,17 +23,19 @@ public class Weapon : MonoBehaviour
     IEnumerator Swing()
     {
         // damage = originDamage;
-        // yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);
 
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
 
         meleeArea.enabled = false;
 
         yield return new WaitForSeconds(0.2f);
         trailEffect.enabled = false;
+
+        trailEffect.Clear();
 
         // damage = 0;
         yield break;
