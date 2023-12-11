@@ -17,7 +17,7 @@ public class enemy : MonoBehaviour
     public int damage;
     public int exp;
     private Image hpBar;
-
+    public int enemyIndex;
     public Player player;
     void Awake()
     {
@@ -43,6 +43,9 @@ public class enemy : MonoBehaviour
     }
     void Start()
     {
+        maxHealth = enemyIndex*10;
+        damage = enemyIndex*10;
+        exp = enemyIndex*10;
         SetHPBar();
         curHealth = maxHealth;
         originalPosition = transform.position;
