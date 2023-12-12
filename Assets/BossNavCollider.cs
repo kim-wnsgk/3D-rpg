@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NavCollider : MonoBehaviour
+public class BossNavCollider : MonoBehaviour
 {
-    enemy parentScript; // Enemy 스크립트 참조 변수
+    Boss1 parentScript; // Enemy 스크립트 참조 변수
     bool isnav = false; // isnav 변수 초기화
 
     // Start 함수에서는 NavMeshAgent 컴포넌트를 가져옵니다.
@@ -12,7 +12,7 @@ public class NavCollider : MonoBehaviour
         // 부모 객체의 Enemy 스크립트 가져오기
         if (transform.parent != null)
         {
-            parentScript = transform.parent.GetComponent<enemy>();
+            parentScript = transform.parent.GetComponent<Boss1>();
         }
     }
 
@@ -23,6 +23,7 @@ public class NavCollider : MonoBehaviour
         {
             if (parentScript != null)
             {
+                parentScript.inBound = true;
                 parentScript.isNav = true; // Enemy 스크립트의 isNav 값을 변경
                 
             }
@@ -34,6 +35,7 @@ public class NavCollider : MonoBehaviour
         {
             if (parentScript != null)
             {
+                parentScript.inBound = true;
                 parentScript.isNav = false; // Enemy 스크립트의 isNav 값을 변경
             }
         }

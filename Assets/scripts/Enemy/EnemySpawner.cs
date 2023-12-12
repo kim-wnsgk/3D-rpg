@@ -16,8 +16,8 @@ public class EnemySpawner : MonoBehaviour
     public int maxMonster = 10;
     //게임 종료 여부 변수
     public bool isGameOver = false;
-
     // Use this for initialization
+    
     void Start()
     {
         //Hierarchy View의 Spawn Point를 찾아 하위에 있는 모든 Transform 컴포넌트를 찾아옴
