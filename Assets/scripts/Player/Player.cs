@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public int maxMana;
     public int exp;
     public int level;
+    public float zSkillCool;
+    float zSkill;
 
 
     Rigidbody rigid;
@@ -54,6 +56,8 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        zSkillCool = 10;
+        zSkill = -10;
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         isJump = false;
@@ -84,7 +88,8 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Move();
-        if (zDown){ //나중에 쿨타임도
+        if (zDown && Time.time - zSkill > zSkillCool){
+            zSkill = Time.time;
             StartCoroutine(Slash());
         }
         Jump();
@@ -297,6 +302,9 @@ public class Player : MonoBehaviour
             Vector3 attackDirection = transform.position - other.transform.position;
             attackDirection.y = 0;  // 수직 방향은 무시
             rigid.AddForce(attackDirection.normalized * 70, ForceMode.Impulse);
+        }
+        if(other.tag == "Bullet"){
+            
         }
     }
 

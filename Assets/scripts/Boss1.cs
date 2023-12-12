@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 public class Boss1 : MonoBehaviour
 {
     public GameObject missile;
@@ -25,6 +26,8 @@ public class Boss1 : MonoBehaviour
     bool isDead;
     public bool angry;
     bool already;
+    private Image hpBar;
+    public Player player;
     
     void Awake(){
         anim = GetComponent<Animator>();
@@ -34,13 +37,40 @@ public class Boss1 : MonoBehaviour
         boxCollider = GetComponent<CapsuleCollider>();
         // mat = GetComponentInChildren<MeshRenderer>().material;
         nav = GetComponent<NavMeshAgent>();    
+        hpBar = transform.Find("HpBar/Canvas/HPFront").GetComponent<Image>();
+        GameObject obj2 = GameObject.FindWithTag("Player");
         //범위 안에 들면 하게 해야할수도
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
+        if (players.Length > 0)
+        {
+            player = players[0].GetComponent<Player>();
+        }
+        else
+        {
+            // players 배열이 비어있는 경우, 원하는 처리를 수행하거나 예외 처리를 추가할 수 있습니다.
+            Debug.LogError("Player not found in the scene.");
+        }
     }
     void Start(){
         if(angry){
             curHealth = maxHealth;
             originalPosition = transform.position;
             isLook = true;
+        }
+        transform.GetChild(1).gameObject.SetActive(true);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
+        if (players.Length > 0)
+        {
+            player = players[0].GetComponent<Player>();
+        }
+        else
+        {
+            // players 배열이 비어있는 경우, 원하는 처리를 수행하거나 예외 처리를 추가할 수 있습니다.
+            Debug.LogError("Player not found in the scene.");
         }
     }
     void Update()
@@ -76,7 +106,23 @@ public class Boss1 : MonoBehaviour
         }
         
     }
-    void OnTriggerEnter(Collider other){
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other);
+        Weapon weapon = other.GetComponent<Weapon>();
+        if (weapon != null)
+        {
+            curHealth -= weapon.damage;
+            curHealth -= player.level;
+            Debug.Log(player.level + "아야!" + curHealth);
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
+        }
+        if(other.GetComponent<PlayerSkill>()!=null){
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
+            
+        }
         if(angry){
             if(other.tag == "Player" && already == false){
                 isNav = true;
@@ -84,14 +130,14 @@ public class Boss1 : MonoBehaviour
                 StartCoroutine(Think());
             }
         }
+    }
+       
     void FixedUpdate(){
         FreezeVelocity();
     }
     void FreezeVelocity(){
         rigid.angularVelocity = Vector3.zero;
         rigid.velocity = Vector3.zero;
-    }
-        
     }
 
     void OnTriggerExit(Collider other){
@@ -128,21 +174,21 @@ public class Boss1 : MonoBehaviour
         
     
     // Start is called before the first frame update
-    IEnumerator OnDamage(Vector3 reactVec){
-        mat.color = Color.red;
-        yield return new WaitForSeconds(0.5f);
-
-        if(curHealth<0){
-            mat.color = Color.white;
-            anim.SetTrigger("doDie");
-            gameObject.layer = 7;
-            Destroy(gameObject,4);
-            isDead = true;
-        }
-        else{
+    IEnumerator OnDamage(Vector3 reactVec)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (curHealth > 0)
+        {
             anim.SetTrigger("doDamage");
-            mat.color = Color.gray;
-            
+            gameObject.layer = 7;
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 200, ForceMode.Impulse);
+        }
+        else
+        {
+            anim.SetTrigger("doDie");
+            Destroy(gameObject, 1);
         }
     }
     IEnumerator Think (){

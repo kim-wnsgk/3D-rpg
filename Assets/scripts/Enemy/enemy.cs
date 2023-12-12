@@ -60,7 +60,6 @@ public class enemy : MonoBehaviour
             anim.SetBool("isWalk", false);
         }
         hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
-
     }
     void SetHPBar()
     {
