@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     float zSkill;
 
 
-    Rigidbody rigid;
+    public Rigidbody rigid;
     bool isJump;
     public float jumpPower = 5f;
 
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
         Instance = this;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
+        
 
         // 현재 씬에서 플레이어가 두 개 이상인 경우 파괴
         if (players.Length > 1)
@@ -88,8 +88,7 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Move();
-        if (zDown && Time.time - zSkill > zSkillCool)
-        {
+        if (zDown && Time.time - zSkill > zSkillCool){
             zSkill = Time.time;
             StartCoroutine(Slash());
         }
@@ -106,7 +105,6 @@ public class Player : MonoBehaviour
             health = 100;
             SceneManager.LoadScene("school");
         }
-
         if (transform.position.y < -10.2f)
         {
             transform.position = new Vector3(0f, 0f, 0f);
@@ -175,7 +173,7 @@ public class Player : MonoBehaviour
     {
         anim.SetTrigger("slash");
         slashCollider.enabled = true;
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds( 1.3f );
         slashCollider.enabled = false;
     }
     void Jump()
@@ -309,9 +307,34 @@ public class Player : MonoBehaviour
             attackDirection.y = 0;  // 수직 방향은 무시
             rigid.AddForce(attackDirection.normalized * 70, ForceMode.Impulse);
         }
-        if (other.tag == "Bullet")
+        if (other.tag == "boss" && equipWeapon && !isFireReady)  // 공격
         {
+            Boss1 enemy = other.GetComponent<Boss1>();
+            enemy.curHealth -= (equipWeapon.damage + level);  // 레벨에 따라 추가데미지
+            Debug.Log("Enemy's health : " + enemy.curHealth);
 
+            if (enemy.curHealth > 0)  // 적이 죽지 않고 공격 당할때
+            {
+                enemy.anim.SetTrigger("doDamage");
+                // enemy.transform.position = enemy.transform.position.normalized;
+                enemy.transform.position += Vector3.up * 10;
+
+                // 적을 뒤로 밀기
+                Vector3 attackDirection = other.transform.position - transform.position;
+                attackDirection.y = 0;  // 수직 방향은 무시
+                enemy.rigid.AddForce(attackDirection.normalized * 50, ForceMode.Impulse);
+            }
+            else  // 적이 죽으면
+            {
+                enemy.anim.SetTrigger("doDie");
+                Destroy(enemy.gameObject, 0);
+                exp += enemy.exp;  // 경험치 쌓임
+            }
+        }
+        if(other.tag == "bullet"){
+            health -= other.GetComponent<Bullet>().damage;
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
         }
     }
 
@@ -356,13 +379,19 @@ public class Player : MonoBehaviour
 
     void handleExp()
     {
-        if (exp >= 10/*0 + level * 10*/)  // 레벨 * 10% 의 가중치를 둔다
+        if (exp >= 100 + level * 10)  // 레벨 * 10% 의 가중치를 둔다
         {
-            level += 3;
-            health = 100;
+            level++;
             exp = 0;
         }
 
     }
-
+    IEnumerator OnDamage(Vector3 reactVec)
+    {
+        reactVec = reactVec.normalized;
+        reactVec += Vector3.up;
+        reactVec.y = 0;
+        rigid.AddForce(reactVec * 200, ForceMode.Impulse);
+        yield return new WaitForSeconds(1.0f);
+    }
 }
