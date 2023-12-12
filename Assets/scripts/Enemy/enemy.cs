@@ -100,6 +100,10 @@ public class enemy : MonoBehaviour
             Vector3 reactVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
+        if(other.GetComponent<PlayerSkill>()!=null){
+            Vector3 reactVec = transform.position - other.transform.position;
+            StartCoroutine(OnDamage(reactVec));
+        }
     }
 
 
@@ -114,7 +118,6 @@ public class enemy : MonoBehaviour
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
             rigid.AddForce(reactVec * 200, ForceMode.Impulse);
-
         }
         else
         {
