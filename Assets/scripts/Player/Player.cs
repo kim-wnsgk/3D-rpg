@@ -161,6 +161,7 @@ public class Player : MonoBehaviour
         if (!isJump && spaceDown)
         {
             anim.SetTrigger("Jump");
+            // rigid.constraints = RigidbodyConstraints.FreezePositionY;
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
         }
@@ -173,7 +174,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isJump = false;
-
+            // rigid.constraints &= ~RigidbodyConstraints.FreezePositionY;
         }
 
 
@@ -284,7 +285,7 @@ public class Player : MonoBehaviour
             health -= enemy.damage;
             Debug.Log("Player's health : " + health);
             Vector3 attackDirection = transform.position - other.transform.position;
-            // attackDirection.y = 0;  // 수직 방향은 무시
+            attackDirection.y = 0;  // 수직 방향은 무시
             rigid.AddForce(attackDirection.normalized * 70, ForceMode.Impulse);
         }
     }
