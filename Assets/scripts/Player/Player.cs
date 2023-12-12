@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
     bool eDown;
     bool qDown;
     bool isBorder;
-
+    bool zDown;
+    SphereCollider slashCollider;
     Vector3 moveVec;
     public Animator anim;
     public TrailRenderer trailRenderer;
@@ -56,13 +57,14 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         isJump = false;
-
+        slashCollider = transform.GetChild(7).gameObject.GetComponent<SphereCollider>();
         // equipWeapon = weapons[0];
         // equipWeapon.SetActive(true);  // 첫번째 무기 기본 설정
         level = 1;
 
         Instance = this;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        
 
         // 현재 씬에서 플레이어가 두 개 이상인 경우 파괴
         if (players.Length > 1)
@@ -82,7 +84,9 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Move();
-
+        if (zDown){ //나중에 쿨타임도
+            StartCoroutine(Slash());
+        }
         Jump();
         Attack();
         Interaction();
@@ -122,6 +126,7 @@ public class Player : MonoBehaviour
         ctrlDown = Input.GetKeyDown(KeyCode.LeftControl);
         eDown = Input.GetKeyDown(KeyCode.E);
         qDown = Input.GetKeyDown(KeyCode.Q);
+        zDown = Input.GetKeyDown(KeyCode.Z);
     }
 
     void Move()
@@ -155,13 +160,18 @@ public class Player : MonoBehaviour
         }
 
     }
-
+    IEnumerator Slash()
+    {
+        anim.SetTrigger("slash");
+        slashCollider.enabled = true;
+        yield return new WaitForSeconds( 1.3f );
+        slashCollider.enabled = false;
+    }
     void Jump()
     {
         if (!isJump && spaceDown)
         {
             anim.SetTrigger("Jump");
-            // rigid.constraints = RigidbodyConstraints.FreezePositionY;
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             isJump = true;
         }
@@ -174,7 +184,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isJump = false;
-            // rigid.constraints &= ~RigidbodyConstraints.FreezePositionY;
+
         }
 
 
