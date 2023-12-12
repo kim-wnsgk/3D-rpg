@@ -37,4 +37,36 @@ public class MoveStage : MonoBehaviour
     {
         LoadingManager.LoadScene("Stage2");
     }
+    public void Move3()
+    {
+        LoadingManager.LoadScene("Stage3");
+    }
+    public void Move4()
+    {
+        LoadingManager.LoadScene("Stage4");
+    }
+    public void Move5()
+    {
+        LoadingManager.LoadScene("Stage5");
+    }
+    public void Move6()
+    {
+        LoadingManager.LoadScene("Stage6");
+    }
+    public void Move7()
+    {
+        LoadingManager.LoadScene("Stage7");
+    }
+    public void Move8()
+    {
+        LoadingManager.LoadScene("Stage8");
+    }
+    public void Move9()
+    {
+        LoadingManager.LoadScene("Stage9");
+    }
+    public void Move10()
+    {
+        LoadingManager.LoadScene("Stage10");
+    }
 }

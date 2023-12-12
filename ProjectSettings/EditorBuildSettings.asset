@@ -9,12 +9,36 @@ EditorBuildSettings:
     path: Assets/Scenes/school.unity
     guid: fd17d848fbef6ed47ac7805c8ba04788
   - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 340f112d5421ba641a6b514b9b44a3a9
+  - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: 9b4fa02130cfa224181690ee48a4b0be
   - enabled: 1
     path: Assets/Scenes/Stage2.unity
+    guid: 12ccb9349c1ce0a4fbb2ce7c39b1695b
+  - enabled: 1
+    path: Assets/Scenes/Stage3.unity
+    guid: f640039542912ae44b8ca880927b4368
+  - enabled: 1
+    path: Assets/Scenes/Stage4.unity
     guid: 508dc99f4eeabcb48a831ee5f39f8542
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
-    guid: 340f112d5421ba641a6b514b9b44a3a9
+    path: Assets/Scenes/Stage5.unity
+    guid: 5d2209cb9929fc74e87869451bdb7ab4
+  - enabled: 1
+    path: Assets/Scenes/Stage6.unity
+    guid: a6d308d725a51d14591fa3b75a62e61e
+  - enabled: 1
+    path: Assets/Scenes/Stage7.unity
+    guid: 707fa500ccf4b17458fb18dc6362fe46
+  - enabled: 1
+    path: Assets/Scenes/Stage8.unity
+    guid: d7d984b301ed782468b66f8be0d692f0
+  - enabled: 1
+    path: Assets/Scenes/Stage9.unity
+    guid: 3ca40ac65b992624ab6b50268e3e40fb
+  - enabled: 1
+    path: Assets/Scenes/Stage10.unity
+    guid: ee81309679098694b9a49b0594e8158e
   m_configObjects: {}

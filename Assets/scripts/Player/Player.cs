@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
         Instance = this;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        
+
 
         // 현재 씬에서 플레이어가 두 개 이상인 경우 파괴
         if (players.Length > 1)
@@ -88,7 +88,8 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Move();
-        if (zDown && Time.time - zSkill > zSkillCool){
+        if (zDown && Time.time - zSkill > zSkillCool)
+        {
             zSkill = Time.time;
             StartCoroutine(Slash());
         }
@@ -169,7 +170,7 @@ public class Player : MonoBehaviour
     {
         anim.SetTrigger("slash");
         slashCollider.enabled = true;
-        yield return new WaitForSeconds( 1.3f );
+        yield return new WaitForSeconds(1.3f);
         slashCollider.enabled = false;
     }
     void Jump()
@@ -303,8 +304,9 @@ public class Player : MonoBehaviour
             attackDirection.y = 0;  // 수직 방향은 무시
             rigid.AddForce(attackDirection.normalized * 70, ForceMode.Impulse);
         }
-        if(other.tag == "Bullet"){
-            
+        if (other.tag == "Bullet")
+        {
+
         }
     }
 
@@ -349,9 +351,10 @@ public class Player : MonoBehaviour
 
     void handleExp()
     {
-        if (exp >= 100 + level * 10)  // 레벨 * 10% 의 가중치를 둔다
+        if (exp >= 10/*0 + level * 10*/)  // 레벨 * 10% 의 가중치를 둔다
         {
-            level++;
+            level += 3;
+            health = 100;
             exp = 0;
         }
 
