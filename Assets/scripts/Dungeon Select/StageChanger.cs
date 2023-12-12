@@ -15,7 +15,7 @@ public class StageChanger : MonoBehaviour
 
     public void Awake()
     {
-        
+
 
         ChangeStage(0);
 
@@ -26,11 +26,11 @@ public class StageChanger : MonoBehaviour
 
         StageList[currentStageIndex].SetActive(false);
         currentStageIndex += _index;
-        if(currentStageIndex >= StageList.Length)
+        if (currentStageIndex >= StageList.Length)
         {
             currentStageIndex -= _index;
         }
-        else if(currentStageIndex < 0)
+        else if (currentStageIndex < 0)
         {
             currentStageIndex -= _index;
         }
@@ -48,7 +48,7 @@ public class StageChanger : MonoBehaviour
 
         else if (currentStageIndex == StageList.Length - 1)
         {
-           
+
             currentColor.a = 0;
             nextButton.color = currentColor;
         }
