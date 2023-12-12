@@ -11,6 +11,8 @@ TagManager:
   - Item
   - EnemyWeapon
   - Stage
+  - bullet
+  - skill
   layers:
   - Default
   - TransparentFX
