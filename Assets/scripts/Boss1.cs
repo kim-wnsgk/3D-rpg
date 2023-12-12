@@ -44,8 +44,8 @@ public class Boss1 : MonoBehaviour
         GameObject obj2 = GameObject.FindWithTag("Player");
         //범위 안에 들면 하게 해야할수도
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        boxCollider.enabled = false;
         SphereCollider = transform.GetChild(8).gameObject.GetComponent<SphereCollider>();
+        SphereCollider.enabled=false;
         // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
         if (players.Length > 0)
         {
@@ -62,7 +62,6 @@ public class Boss1 : MonoBehaviour
             curHealth = maxHealth;
             originalPosition = transform.position;
             isLook = true;
-            boxCollider.enabled= true;
         }
         transform.GetChild(1).gameObject.SetActive(true);
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -97,7 +96,7 @@ public class Boss1 : MonoBehaviour
                 if(distance<0.5f){
                     anim.SetBool("isWalk",false);
                 }
-            if(inBound == true&& already == false){
+            if(inBound == true && already == false){
                 isNav = true;
                 already = true;
                 StartCoroutine(Think());
@@ -137,13 +136,14 @@ public class Boss1 : MonoBehaviour
         {
             curHealth -= weapon.damage;
             curHealth -= player.level;
-            Debug.Log(player.level + "아야!" + curHealth);
-            Vector3 reactVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reactVec));
+            // Debug.Log(player.level + "아야!" + curHealth);
+            // Vector3 reactVec = transform.position - other.transform.position;
+            // StartCoroutine(OnDamage(reactVec));
         }
         if(other.GetComponent<PlayerSkill>()!=null){
-            Vector3 reactVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reactVec));
+            curHealth -= other.GetComponent<PlayerSkill>().damage;
+            // Vector3 reactVec = transform.position - other.transform.position;
+            // StartCoroutine(OnDamage(reactVec));
             
         }
     }
@@ -181,27 +181,27 @@ public class Boss1 : MonoBehaviour
         
     
     // Start is called before the first frame update
-    IEnumerator OnDamage(Vector3 reactVec)
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (curHealth > 0)
-        {
-            anim.SetTrigger("doDamage");
-            gameObject.layer = 7;
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 200, ForceMode.Impulse);
-        }
-        else
-        {
-            anim.SetTrigger("doDie");
-            Destroy(gameObject, 1);
-        }
-    }
+    // IEnumerator OnDamage(Vector3 reactVec)
+    // {
+    //     yield return new WaitForSeconds(0.1f);
+    //     if (curHealth > 0)
+    //     {
+    //         anim.SetTrigger("doDamage");
+    //         gameObject.layer = 7;
+    //         reactVec = reactVec.normalized;
+    //         reactVec += Vector3.up;
+    //         rigid.AddForce(reactVec * 200, ForceMode.Impulse);
+    //     }
+    //     else
+    //     {
+    //         anim.SetTrigger("doDie");
+    //         Destroy(gameObject, 1);
+    //     }
+    // }
     IEnumerator Think (){
         yield return new WaitForSeconds(0.1f);
         int ranAction = Random.Range(0, 5);
-        if(Vector3.Distance(transform.position, target.position)<7f){
+        if(Vector3.Distance(transform.position, target.position)<9f){
             StartCoroutine(Attack());
         }
         else if(Vector3.Distance(transform.position, target.position)<15f){
@@ -264,12 +264,14 @@ public class Boss1 : MonoBehaviour
     }
     IEnumerator Attack()
     {
+        yield return new WaitForSeconds (1f);//애니메이션에 맞게 수정
         isNav=false;
         SphereCollider.enabled=true;
         anim.SetTrigger("attack");
-        yield return new WaitForSeconds (2.5f);//애니메이션에 맞게 수정
+        yield return new WaitForSeconds (0.1f);
         isNav=true;
         SphereCollider.enabled=false;
+        yield return new WaitForSeconds (1f);
         StartCoroutine(Think());
     }
 
@@ -277,7 +279,7 @@ IEnumerator Jump()
 {
     anim.SetTrigger("jump");
     isLook = false;
-    boxCollider.enabled = false;
+    MeleeArea.enabled = false;
 
     rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
@@ -289,7 +291,7 @@ IEnumerator Jump()
 
     yield return new WaitForSeconds(4f);
     isLook = true;
-    boxCollider.enabled = true;
+    MeleeArea.enabled = true;
     StartCoroutine(Think());
 }
 
