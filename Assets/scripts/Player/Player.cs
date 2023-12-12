@@ -106,6 +106,11 @@ public class Player : MonoBehaviour
             health = 100;
             SceneManager.LoadScene("school");
         }
+
+        if (transform.position.y < -10.2f)
+        {
+            transform.position = new Vector3(0f, 0f, 0f);
+        }
     }
 
     void FixedUpdate()
