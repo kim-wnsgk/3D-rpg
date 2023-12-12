@@ -100,6 +100,7 @@ public class enemy : MonoBehaviour
             StartCoroutine(OnDamage(reactVec));
         }
         if(other.GetComponent<PlayerSkill>()!=null){
+            curHealth -= other.GetComponent<PlayerSkill>().damage;
             Vector3 reactVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }

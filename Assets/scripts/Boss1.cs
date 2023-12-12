@@ -13,7 +13,7 @@ public class Boss1 : MonoBehaviour
     public int curHealth;
     public int jumpPower;
     public Transform target;
-    Rigidbody rigid;
+    public Rigidbody rigid;
     CapsuleCollider boxCollider;
     Material mat;
     NavMeshAgent nav;   
@@ -28,6 +28,9 @@ public class Boss1 : MonoBehaviour
     bool already;
     private Image hpBar;
     public Player player;
+    public bool inBound;
+    public int exp;
+    public SphereCollider SphereCollider;
     
     void Awake(){
         anim = GetComponent<Animator>();
@@ -41,7 +44,8 @@ public class Boss1 : MonoBehaviour
         GameObject obj2 = GameObject.FindWithTag("Player");
         //범위 안에 들면 하게 해야할수도
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
+        SphereCollider = transform.GetChild(8).gameObject.GetComponent<SphereCollider>();
+        SphereCollider.enabled=false;
         // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
         if (players.Length > 0)
         {
@@ -72,6 +76,7 @@ public class Boss1 : MonoBehaviour
             // players 배열이 비어있는 경우, 원하는 처리를 수행하거나 예외 처리를 추가할 수 있습니다.
             Debug.LogError("Player not found in the scene.");
         }
+        SetHPBar();
     }
     void Update()
     {       
@@ -91,11 +96,28 @@ public class Boss1 : MonoBehaviour
                 if(distance<0.5f){
                     anim.SetBool("isWalk",false);
                 }
+            if(inBound == true && already == false){
+                isNav = true;
+                already = true;
+                StartCoroutine(Think());
+            }
+            if(inBound == false){
+                isNav = false;
+                already = false;
+                StopAllCoroutines();
+            }
         }
+        hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
     }
+    void SetHPBar()
+    {
+        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+    }
+    
     void onTrace(){
         if(angry){
             if(isNav){
+                nav.isStopped = false;
                 nav.SetDestination(target.position);
                 anim.SetBool("isWalk",true);
             }
@@ -114,21 +136,15 @@ public class Boss1 : MonoBehaviour
         {
             curHealth -= weapon.damage;
             curHealth -= player.level;
-            Debug.Log(player.level + "아야!" + curHealth);
-            Vector3 reactVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reactVec));
+            // Debug.Log(player.level + "아야!" + curHealth);
+            // Vector3 reactVec = transform.position - other.transform.position;
+            // StartCoroutine(OnDamage(reactVec));
         }
         if(other.GetComponent<PlayerSkill>()!=null){
-            Vector3 reactVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage(reactVec));
+            curHealth -= other.GetComponent<PlayerSkill>().damage;
+            // Vector3 reactVec = transform.position - other.transform.position;
+            // StartCoroutine(OnDamage(reactVec));
             
-        }
-        if(angry){
-            if(other.tag == "Player" && already == false){
-                isNav = true;
-                already = true;
-                StartCoroutine(Think());
-            }
         }
     }
        
@@ -140,15 +156,6 @@ public class Boss1 : MonoBehaviour
         rigid.velocity = Vector3.zero;
     }
 
-    void OnTriggerExit(Collider other){
-        if(angry){
-            if(other.tag == "Player"){
-                isNav=false;
-                StopAllCoroutines();
-            }
-        }
-
-    }
     
         // if(other.tag == "Melee"){
         //     Weapon weapon = other.GetComponent<Weapon>();
@@ -174,27 +181,27 @@ public class Boss1 : MonoBehaviour
         
     
     // Start is called before the first frame update
-    IEnumerator OnDamage(Vector3 reactVec)
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (curHealth > 0)
-        {
-            anim.SetTrigger("doDamage");
-            gameObject.layer = 7;
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 200, ForceMode.Impulse);
-        }
-        else
-        {
-            anim.SetTrigger("doDie");
-            Destroy(gameObject, 1);
-        }
-    }
+    // IEnumerator OnDamage(Vector3 reactVec)
+    // {
+    //     yield return new WaitForSeconds(0.1f);
+    //     if (curHealth > 0)
+    //     {
+    //         anim.SetTrigger("doDamage");
+    //         gameObject.layer = 7;
+    //         reactVec = reactVec.normalized;
+    //         reactVec += Vector3.up;
+    //         rigid.AddForce(reactVec * 200, ForceMode.Impulse);
+    //     }
+    //     else
+    //     {
+    //         anim.SetTrigger("doDie");
+    //         Destroy(gameObject, 1);
+    //     }
+    // }
     IEnumerator Think (){
         yield return new WaitForSeconds(0.1f);
         int ranAction = Random.Range(0, 5);
-        if(Vector3.Distance(transform.position, target.position)<5f){
+        if(Vector3.Distance(transform.position, target.position)<9f){
             StartCoroutine(Attack());
         }
         else if(Vector3.Distance(transform.position, target.position)<15f){
@@ -257,10 +264,14 @@ public class Boss1 : MonoBehaviour
     }
     IEnumerator Attack()
     {
+        yield return new WaitForSeconds (1f);//애니메이션에 맞게 수정
         isNav=false;
+        SphereCollider.enabled=true;
         anim.SetTrigger("attack");
-        yield return new WaitForSeconds (2.5f);//애니메이션에 맞게 수정
+        yield return new WaitForSeconds (0.1f);
         isNav=true;
+        SphereCollider.enabled=false;
+        yield return new WaitForSeconds (1f);
         StartCoroutine(Think());
     }
 
@@ -268,7 +279,7 @@ IEnumerator Jump()
 {
     anim.SetTrigger("jump");
     isLook = false;
-    boxCollider.enabled = false;
+    MeleeArea.enabled = false;
 
     rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
@@ -280,7 +291,7 @@ IEnumerator Jump()
 
     yield return new WaitForSeconds(4f);
     isLook = true;
-    boxCollider.enabled = true;
+    MeleeArea.enabled = true;
     StartCoroutine(Think());
 }
 
