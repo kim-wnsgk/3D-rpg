@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerSkill : MonoBehaviour
 {
     public int damage;
+
     // Start is called before the first frame update
     void Start()
     {
-        damage = transform.parent.gameObject.GetComponent<Player>().level;
+        damage = 10 + transform.parent.gameObject.GetComponent<Player>().str*10;
     }
 
     // Update is called once per frame

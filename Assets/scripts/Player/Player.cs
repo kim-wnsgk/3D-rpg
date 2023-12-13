@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-
+    Character character;
     public float moveSpeed = 10.0f; // 이동 속도
     public GameObject[] weapons;  // Weapons들 저장
     public bool[] hasWeapons;  // 해당 인덱스 weapon 갖고 있는지
@@ -63,6 +63,11 @@ public class Player : MonoBehaviour
     public AudioClip attack2;
     public AudioSource audioSource;
 
+    public int str;
+    public int hp;
+    public int mp;
+
+
 
     private float healthRegenTimer = 0f;
     public float healthRegenInterval = 1f;
@@ -95,7 +100,10 @@ public class Player : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    void Start(){
+        maxHealth = 100 + hp*10;
+        maxMana = 30 + mp*10;
+    }
     void Update()
     {
         GetInput();
@@ -146,6 +154,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Debug.Log("player",str);
         FreezeRotation();
         StopToWall();
     }
@@ -446,6 +455,7 @@ public class Player : MonoBehaviour
         if (exp >= 100 + level * 10)  // 레벨 * 10% 의 가중치를 둔다
         {
             level++;
+            character.LevelUp();
             exp = 0;
         }
 

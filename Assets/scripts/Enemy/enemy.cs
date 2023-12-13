@@ -93,7 +93,6 @@ public class enemy : MonoBehaviour
         if (weapon != null)
         {
             curHealth -= weapon.damage;
-            curHealth -= player.level;
             Debug.Log(player.level + "아야!" + curHealth);
             Debug.Log("enemyindex : " + enemyIndex);
             Vector3 reactVec = transform.position - other.transform.position;

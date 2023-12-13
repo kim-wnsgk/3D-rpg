@@ -8,6 +8,7 @@ using UnityEngine.TextCore.Text;
 public delegate void KillConfirmed(Character character);
 public class Character : MonoBehaviour
 {
+    Player player;
     public int Health = 50;
 
     [Header("Level")]
@@ -84,6 +85,7 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
+
         CalculateRequiredExp();
         
         statPanel.SetStats(Strength, Dexterity, HPandMP, Damage);
@@ -141,6 +143,10 @@ public class Character : MonoBehaviour
             // Ouverture/Fermeture du menu des sorts
             OpenClose(menus[0]);
         }
+
+        // player.str = (int)Strength.BaseValue;
+        // player.hp = (int)HPandMP.BaseValue;
+        Debug.Log("여기" + Strength.Value);
     }
 
     private int ChangeSlot()

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    
     // public int originDamage = 1;
     public int damage = 2;
     public float rate = 0.5f;
