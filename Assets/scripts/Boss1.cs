@@ -8,7 +8,7 @@ public class Boss1 : MonoBehaviour
 {
     public GameObject missile;
     public Transform missilePort;
-    public BoxCollider MeleeArea;
+    public GameObject MeleeArea;
     public int maxHealth;
     public int curHealth;
     public int jumpPower;
@@ -30,8 +30,7 @@ public class Boss1 : MonoBehaviour
     public Player player;
     public bool inBound;
     public int exp;
-    public SphereCollider SphereCollider;
-    
+    public GameObject SphereCollider;
     void Awake(){
         anim = GetComponent<Animator>();
         isNav = false;
@@ -44,8 +43,11 @@ public class Boss1 : MonoBehaviour
         GameObject obj2 = GameObject.FindWithTag("Player");
         //범위 안에 들면 하게 해야할수도
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        SphereCollider = transform.GetChild(8).gameObject.GetComponent<SphereCollider>();
-        SphereCollider.enabled=false;
+        SphereCollider = transform.Find("attack_area").gameObject;
+        MeleeArea = transform.Find("jump_area").gameObject;
+        // SphereCollider = transform.Find("attack_area").gameObject.GetComponent<SphereCollider>();
+        MeleeArea.SetActive(false);
+        SphereCollider.SetActive(false);
         target = obj2.transform;
         // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
         if (players.Length > 0)
@@ -205,7 +207,7 @@ public class Boss1 : MonoBehaviour
     IEnumerator Think (){
         yield return new WaitForSeconds(0.1f);
         int ranAction = Random.Range(0, 5);
-        if(Vector3.Distance(transform.position, target.position)<9f){
+        if(Vector3.Distance(transform.position, target.position)<5f){
             StartCoroutine(Attack());
         }
         else if(Vector3.Distance(transform.position, target.position)<15f){
@@ -270,11 +272,11 @@ public class Boss1 : MonoBehaviour
     {
         yield return new WaitForSeconds (1f);//애니메이션에 맞게 수정
         isNav=false;
-        SphereCollider.enabled=true;
+        SphereCollider.SetActive(false);
         anim.SetTrigger("attack");
         yield return new WaitForSeconds (0.1f);
         isNav=true;
-        SphereCollider.enabled=false;
+        SphereCollider.SetActive(true);
         yield return new WaitForSeconds (1f);
         StartCoroutine(Think());
     }
@@ -283,19 +285,17 @@ IEnumerator Jump()
 {
     anim.SetTrigger("jump");
     isLook = false;
-    MeleeArea.enabled = false;
 
     rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
     yield return new WaitForSeconds(1f); // 점프가 끝날 때까지 대기
 
-    MeleeArea.enabled = true;
-    yield return new WaitForSeconds(0.5f);
-    MeleeArea.enabled = false;
+    MeleeArea.SetActive(true);
+    yield return new WaitForSeconds(0.1f);
+    MeleeArea.SetActive(false);
 
-    yield return new WaitForSeconds(4f);
+    yield return new WaitForSeconds(1f);
     isLook = true;
-    MeleeArea.enabled = true;
     StartCoroutine(Think());
 }
 

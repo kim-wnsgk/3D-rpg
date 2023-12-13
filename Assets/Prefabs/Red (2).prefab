@@ -780,9 +780,9 @@ GameObject:
   - component: {fileID: 6463284447392500133}
   - component: {fileID: 7659985533656216981}
   - component: {fileID: 7374669848224158824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red (2)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
