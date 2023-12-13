@@ -54,6 +54,15 @@ public class Player : MonoBehaviour
     float lastComboTime = 0;
     float maxComboDelay = 1.5f;
 
+
+    bool isMoving;
+    public AudioClip walkSound;
+    public AudioClip runSound;
+    public AudioClip jumpSound;
+    public AudioClip attack1;
+    public AudioClip attack2;
+    public AudioSource audioSource;
+
     void Awake()
     {
         zSkillCool = 10;
@@ -68,7 +77,7 @@ public class Player : MonoBehaviour
 
         Instance = this;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        
+
 
         // 현재 씬에서 플레이어가 두 개 이상인 경우 파괴
         if (players.Length > 1)
@@ -88,7 +97,8 @@ public class Player : MonoBehaviour
     {
         GetInput();
         Move();
-        if (zDown && Time.time - zSkill > zSkillCool){
+        if (zDown && Time.time - zSkill > zSkillCool)
+        {
             zSkill = Time.time;
             StartCoroutine(Slash());
         }
@@ -162,10 +172,21 @@ public class Player : MonoBehaviour
         if (isRun)
         {
             trailRenderer.emitting = true;
+            audioSource.clip = runSound;
+            if (!audioSource.isPlaying)
+                audioSource.Play();
         }
         else
         {
             trailRenderer.emitting = false;
+            if (hAxis != 0 || vAxis != 0)
+            {
+                audioSource.clip = walkSound;
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
+            }
+            else
+                audioSource.Stop();
         }
 
     }
@@ -173,7 +194,9 @@ public class Player : MonoBehaviour
     {
         anim.SetTrigger("slash");
         slashCollider.enabled = true;
-        yield return new WaitForSeconds( 1.3f );
+        audioSource.clip = attack2;
+        audioSource.Play();
+        yield return new WaitForSeconds(1.3f);
         slashCollider.enabled = false;
     }
     void Jump()
@@ -182,6 +205,8 @@ public class Player : MonoBehaviour
         {
             anim.SetTrigger("Jump");
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            audioSource.clip = jumpSound;
+            audioSource.Play();
             isJump = true;
         }
     }
@@ -331,7 +356,8 @@ public class Player : MonoBehaviour
                 exp += enemy.exp;  // 경험치 쌓임
             }
         }
-        if(other.tag == "bullet"){
+        if (other.tag == "bullet")
+        {
             health -= other.GetComponent<Bullet>().damage;
             Vector3 reactVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reactVec));
@@ -364,14 +390,20 @@ public class Player : MonoBehaviour
             if (comboStack == 1)
             {
                 anim.SetTrigger("combo1");
+                audioSource.clip = attack1;
+                audioSource.Play();
             }
             else if (comboStack == 2)
             {
                 anim.SetTrigger("combo2");
+                audioSource.clip = attack2;
+                audioSource.Play();
             }
             else
             {
                 anim.SetTrigger("combo3");
+                audioSource.clip = attack1;
+                audioSource.Play();
             }
             fireDelay = 0;
         }
