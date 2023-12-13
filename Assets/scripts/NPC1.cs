@@ -9,7 +9,7 @@ public class Npc1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,13 +17,15 @@ public class Npc1 : MonoBehaviour
     {
         Transform();
     }
-    void Transform(){
-        if(transf){
+    void Transform()
+    {
+        if (transf)
+        {
             gameObject.GetComponent<Boss1>().enabled = true;
             Boss1 boss1 = GetComponent<Boss1>();
             if (boss1 != null)
             {
-                boss1.angry=true; // 다른 스크립트의 public 변수에 접근
+                boss1.angry = true; // 다른 스크립트의 public 변수에 접근
                 Vector3 currentScale = transform.localScale;
                 // X, Y, Z 각각 3배씩 곱하여 크기를 증가시킵니다.
                 currentScale.x *= 3f;
@@ -33,8 +35,12 @@ public class Npc1 : MonoBehaviour
                 // 변경된 크기를 적용합니다.
                 transform.localScale = currentScale;
                 gameObject.GetComponent<Npc1>().enabled = false;
-            }       
+            }
         }
 
+    }
+    public void bossMode()
+    {
+        transf = true;
     }
 }

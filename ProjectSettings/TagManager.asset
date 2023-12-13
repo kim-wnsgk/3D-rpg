@@ -13,6 +13,8 @@ TagManager:
   - Stage
   - bullet
   - skill
+  - interactable
+  - Canvas
   layers:
   - Default
   - TransparentFX

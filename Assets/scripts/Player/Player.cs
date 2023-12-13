@@ -412,7 +412,7 @@ public class Player : MonoBehaviour
         if (other.tag == "EnemyWeapon")
         {
             BossMissile enemy = other.GetComponent<BossMissile>();
-            health -= enemy.damage;
+            health -= 10;
             Vector3 reactVec = transform.position - enemy.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
