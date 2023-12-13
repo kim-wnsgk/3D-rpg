@@ -68,13 +68,14 @@ public class Player : MonoBehaviour
     public int mp;
 
 
+    public GameObject canvas;
 
     private float healthRegenTimer = 0f;
     public float healthRegenInterval = 1f;
     void Awake()
     {
         str = 1;
-        hp =1;
+        hp = 1;
         mp = 1;
         //삭제 해야됨. 
 
@@ -104,11 +105,13 @@ public class Player : MonoBehaviour
         {
             gameObject.tag = "Player";
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(canvas);
         }
     }
-    void Start(){
-        maxHealth = 100 + hp*10;
-        maxMana = 30 + mp*10;
+    void Start()
+    {
+        maxHealth = 100 + hp * 10;
+        maxMana = 30 + mp * 10;
     }
     void Update()
     {
@@ -230,14 +233,14 @@ public class Player : MonoBehaviour
     }
     IEnumerator Slash()
     {
-        equipWeapon.trailEffect.enabled=true;
+        equipWeapon.trailEffect.enabled = true;
         anim.SetTrigger("slash");
         slashCollider.enabled = true;
         audioSource.clip = attack2;
         audioSource.Play();
         yield return new WaitForSeconds(1.3f);
         slashCollider.enabled = false;
-        equipWeapon.trailEffect.enabled=false;
+        equipWeapon.trailEffect.enabled = false;
         equipWeapon.trailEffect.Clear();
     }
     void Jump()
