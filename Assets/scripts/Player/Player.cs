@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         // equipWeapon = weapons[0];
         // equipWeapon.SetActive(true);  // 첫번째 무기 기본 설정
         level = 1;
-
+        slashCollider.enabled = false;
         Instance = this;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -320,6 +320,7 @@ public class Player : MonoBehaviour
                 enemy.anim.SetTrigger("doDie");
                 Destroy(enemy.gameObject, 0);
                 exp += enemy.exp;  // 경험치 쌓임
+                coin += enemy.exp;
             }
         }
 
@@ -358,8 +359,15 @@ public class Player : MonoBehaviour
         }
         if (other.tag == "bullet")
         {
-            health -= other.GetComponent<Bullet>().damage;
-            Vector3 reactVec = transform.position - other.transform.position;
+            Bullet enemy = other.GetComponent<Bullet>();
+            health -= enemy.damage;
+            Vector3 reactVec = transform.position - enemy.transform.position;
+            StartCoroutine(OnDamage(reactVec));
+        }
+        if(other.tag =="EnemyWeapon"){
+            BossMissile enemy = other.GetComponent<BossMissile>();
+            health -= enemy.damage;
+            Vector3 reactVec = transform.position - enemy.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
     }

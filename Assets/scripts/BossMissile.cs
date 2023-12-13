@@ -32,5 +32,8 @@ public class BossMissile : MonoBehaviour
         if(!isMelee && other.gameObject.tag == "wall"){
             Destroy(gameObject);
         }
+        if(other.gameObject.tag=="Player"){
+            Destroy(gameObject);
+        }
     }
 }

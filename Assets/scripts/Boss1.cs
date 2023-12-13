@@ -46,6 +46,7 @@ public class Boss1 : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         SphereCollider = transform.GetChild(8).gameObject.GetComponent<SphereCollider>();
         SphereCollider.enabled=false;
+        target = obj2.transform;
         // players 배열이 비어있지 않은 경우, 첫 번째 플레이어를 선택
         if (players.Length > 0)
         {
@@ -108,6 +109,9 @@ public class Boss1 : MonoBehaviour
             }
         }
         hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
+        if(curHealth<0){
+            Destroy(gameObject, 1);
+        }
     }
     void SetHPBar()
     {
