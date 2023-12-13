@@ -413,7 +413,7 @@ public class Player : MonoBehaviour
         {
             BossMissile enemy = other.GetComponent<BossMissile>();
             health -= 10;
-            Vector3 reactVec = transform.position - enemy.transform.position;
+            Vector3 reactVec = transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
     }

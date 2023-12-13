@@ -16,7 +16,7 @@ public class Boss1 : MonoBehaviour
     public Rigidbody rigid;
     CapsuleCollider boxCollider;
     Material mat;
-    NavMeshAgent nav;   
+    NavMeshAgent nav;
     public Animator anim;
     public bool isNav;
     private Vector3 originalPosition;
@@ -31,14 +31,15 @@ public class Boss1 : MonoBehaviour
     public bool inBound;
     public int exp;
     public GameObject SphereCollider;
-    void Awake(){
+    void Awake()
+    {
         anim = GetComponent<Animator>();
         isNav = false;
         already = false;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<CapsuleCollider>();
         // mat = GetComponentInChildren<MeshRenderer>().material;
-        nav = GetComponent<NavMeshAgent>();    
+        nav = GetComponent<NavMeshAgent>();
         hpBar = transform.Find("HpBar/Canvas/HPFront").GetComponent<Image>();
         GameObject obj2 = GameObject.FindWithTag("Player");
         //범위 안에 들면 하게 해야할수도
@@ -60,8 +61,10 @@ public class Boss1 : MonoBehaviour
             Debug.LogError("Player not found in the scene.");
         }
     }
-    void Start(){
-        if(angry){
+    void Start()
+    {
+        if (angry)
+        {
             curHealth = maxHealth;
             originalPosition = transform.position;
             isLook = true;
@@ -82,36 +85,43 @@ public class Boss1 : MonoBehaviour
         SetHPBar();
     }
     void Update()
-    {       
-        if(angry){
-                if(isDead){
-                    StopAllCoroutines();
-                    return;
-                }
-                if(isLook){
-                    float h = Input.GetAxisRaw("Horizontal");
-                    float v = Input.GetAxisRaw("Vertical");
-                    lookVec = new Vector3(h, 0, v)* 5f;
-                    transform.LookAt(target.position + lookVec);
-                }
-                onTrace();
-                float distance = Vector3.Distance(transform.position, originalPosition);
-                if(distance<0.5f){
-                    anim.SetBool("isWalk",false);
-                }
-            if(inBound == true && already == false){
+    {
+        if (angry)
+        {
+            if (isDead)
+            {
+                StopAllCoroutines();
+                return;
+            }
+            if (isLook)
+            {
+                float h = Input.GetAxisRaw("Horizontal");
+                float v = Input.GetAxisRaw("Vertical");
+                lookVec = new Vector3(h, 0, v) * 5f;
+                transform.LookAt(target.position + lookVec);
+            }
+            onTrace();
+            float distance = Vector3.Distance(transform.position, originalPosition);
+            if (distance < 0.5f)
+            {
+                anim.SetBool("isWalk", false);
+            }
+            if (inBound == true && already == false)
+            {
                 isNav = true;
                 already = true;
                 StartCoroutine(Think());
             }
-            if(inBound == false){
+            if (inBound == false)
+            {
                 isNav = false;
                 already = false;
                 StopAllCoroutines();
             }
         }
         hpBar.rectTransform.localScale = new Vector3((float)curHealth / (float)maxHealth, 1f, 1f);
-        if(curHealth<0){
+        if (curHealth < 0)
+        {
             Destroy(gameObject, 1);
         }
     }
@@ -119,20 +129,24 @@ public class Boss1 : MonoBehaviour
     {
         hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
-    
-    void onTrace(){
-        if(angry){
-            if(isNav){
+
+    void onTrace()
+    {
+        if (angry)
+        {
+            if (isNav)
+            {
                 nav.isStopped = false;
                 nav.SetDestination(target.position);
-                anim.SetBool("isWalk",true);
+                anim.SetBool("isWalk", true);
             }
-            else{
+            else
+            {
                 nav.isStopped = true;
-                anim.SetBool("isWalk",false);
+                anim.SetBool("isWalk", false);
             }
         }
-        
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -146,46 +160,49 @@ public class Boss1 : MonoBehaviour
             // Vector3 reactVec = transform.position - other.transform.position;
             // StartCoroutine(OnDamage(reactVec));
         }
-        if(other.GetComponent<PlayerSkill>()!=null){
+        if (other.GetComponent<PlayerSkill>() != null)
+        {
             curHealth -= other.GetComponent<PlayerSkill>().damage;
             // Vector3 reactVec = transform.position - other.transform.position;
             // StartCoroutine(OnDamage(reactVec));
-            
+
         }
     }
-       
-    void FixedUpdate(){
+
+    void FixedUpdate()
+    {
         FreezeVelocity();
     }
-    void FreezeVelocity(){
+    void FreezeVelocity()
+    {
         rigid.angularVelocity = Vector3.zero;
         rigid.velocity = Vector3.zero;
     }
 
-    
-        // if(other.tag == "Melee"){
-        //     Weapon weapon = other.GetComponent<Weapon>();
-        //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
-        //     curHealth -= weapon.damage;
-        //     Vector3 reactVec = transform.position - other.transform.position;
-        //     StartCoroutine(OnDamage());
-        // }
-        // else if(other.tag == "magic"){
-        //     Magic magic = other.GetComponent<Magic>();
-        //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
-        //     curHealth -= magic.damage;
-        //     Vector3 reactVec = transform.position - other.transform.position;
-        //     StartCoroutine(OnDamage());
-        // }
-    
+
+    // if(other.tag == "Melee"){
+    //     Weapon weapon = other.GetComponent<Weapon>();
+    //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
+    //     curHealth -= weapon.damage;
+    //     Vector3 reactVec = transform.position - other.transform.position;
+    //     StartCoroutine(OnDamage());
+    // }
+    // else if(other.tag == "magic"){
+    //     Magic magic = other.GetComponent<Magic>();
+    //     //플레이어 스텟으로 인한 공격력이 weapon.damage 올리는 방식으로 하자
+    //     curHealth -= magic.damage;
+    //     Vector3 reactVec = transform.position - other.transform.position;
+    //     StartCoroutine(OnDamage());
+    // }
+
     // void OnTriggerExit(Collider other){
     //     if(other.tag == "Player"){
     //         isNav=false;
     //         nav.SetDestination(originalPosition);
     //     }
     // }
-        
-    
+
+
     // Start is called before the first frame update
     // IEnumerator OnDamage(Vector3 reactVec)
     // {
@@ -204,14 +221,18 @@ public class Boss1 : MonoBehaviour
     //         Destroy(gameObject, 1);
     //     }
     // }
-    IEnumerator Think (){
+    IEnumerator Think()
+    {
         yield return new WaitForSeconds(0.1f);
         int ranAction = Random.Range(0, 5);
-        if(Vector3.Distance(transform.position, target.position)<5f){
+        if (Vector3.Distance(transform.position, target.position) < 5f)
+        {
             StartCoroutine(Attack());
         }
-        else if(Vector3.Distance(transform.position, target.position)<15f){
-            switch (ranAction) {
+        else if (Vector3.Distance(transform.position, target.position) < 15f)
+        {
+            switch (ranAction)
+            {
                 case 0:
                     StartCoroutine(Walk());
                     break;
@@ -232,8 +253,10 @@ public class Boss1 : MonoBehaviour
                     break;
             }
         }
-        else{
-            switch (ranAction) {
+        else
+        {
+            switch (ranAction)
+            {
                 case 0:
                     StartCoroutine(Walk());
                     break;
@@ -257,52 +280,52 @@ public class Boss1 : MonoBehaviour
         }
     }
     IEnumerator MissileShot()
-    {   
-        isNav=false;
+    {
+        isNav = false;
         anim.SetTrigger("throw");
         yield return new WaitForSeconds(1.5f);
-        GameObject instantMissile = Instantiate(missile, missilePort.position,missilePort.rotation);
+        GameObject instantMissile = Instantiate(missile, missilePort.position, missilePort.rotation);
         BossMissile bossMissile = instantMissile.GetComponent<BossMissile>();
         bossMissile.target = target;
-        yield return new WaitForSeconds (2f);//애니메이션에 맞게 수정
-        isNav=true;
+        yield return new WaitForSeconds(2f);//애니메이션에 맞게 수정
+        isNav = true;
         StartCoroutine(Think());
     }
     IEnumerator Attack()
     {
-        yield return new WaitForSeconds (1f);//애니메이션에 맞게 수정
-        isNav=false;
-        SphereCollider.SetActive(false);
-        anim.SetTrigger("attack");
-        yield return new WaitForSeconds (0.1f);
-        isNav=true;
+        yield return new WaitForSeconds(1f);//애니메이션에 맞게 수정
+        isNav = false;
         SphereCollider.SetActive(true);
-        yield return new WaitForSeconds (1f);
+        anim.SetTrigger("attack");
+        yield return new WaitForSeconds(0.1f);
+        isNav = true;
+        SphereCollider.SetActive(false);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(Think());
     }
 
-IEnumerator Jump()
-{
-    anim.SetTrigger("jump");
-    isLook = false;
+    IEnumerator Jump()
+    {
+        anim.SetTrigger("jump");
+        isLook = false;
 
-    rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
-    yield return new WaitForSeconds(1f); // 점프가 끝날 때까지 대기
+        yield return new WaitForSeconds(1f); // 점프가 끝날 때까지 대기
 
-    MeleeArea.SetActive(true);
-    yield return new WaitForSeconds(0.1f);
-    MeleeArea.SetActive(false);
+        MeleeArea.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        MeleeArea.SetActive(false);
 
-    yield return new WaitForSeconds(1f);
-    isLook = true;
-    StartCoroutine(Think());
-}
+        yield return new WaitForSeconds(1f);
+        isLook = true;
+        StartCoroutine(Think());
+    }
 
 
     IEnumerator Walk()
     {
-        yield return new WaitForSeconds (1f);
+        yield return new WaitForSeconds(1f);
         StartCoroutine(Think());
     }
 

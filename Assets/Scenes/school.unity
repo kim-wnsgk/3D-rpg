@@ -11912,6 +11912,10 @@ PrefabInstance:
       value: Big Vegas
       objectReference: {fileID: 0}
     - target: {fileID: 6713063576811928077, guid: 7990402ffaaa71f49a39cea1874608d2, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6713063576811928077, guid: 7990402ffaaa71f49a39cea1874608d2, type: 3}
       propertyPath: m_TagString
       value: EnemyWeapon
       objectReference: {fileID: 0}
