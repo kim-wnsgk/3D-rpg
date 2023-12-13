@@ -110,7 +110,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        maxHealth = 100 + hp * 10;
+        maxHealth = 1000;
+        health = maxHealth;
         maxMana = 30 + mp * 10;
     }
     void Update()

@@ -68032,7 +68032,7 @@ PrefabInstance:
       objectReference: {fileID: 540597394}
     - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: health
-      value: 10000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: attack1
@@ -68060,7 +68060,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: b9f35caca8e56774fbde91b7a6de92f3, type: 3}
     - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: maxHealth
-      value: 10000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: walkSound
