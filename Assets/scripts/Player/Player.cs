@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
     public float healthRegenInterval = 1f;
     void Awake()
     {
-        str = 1;
+        str = 30;
         hp = 1;
         mp = 1;
         //삭제 해야됨. 
