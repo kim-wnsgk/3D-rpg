@@ -8,7 +8,7 @@ using UnityEngine.TextCore.Text;
 public delegate void KillConfirmed(Character character);
 public class Character : MonoBehaviour
 {
-    Player player;
+    public Player player;
     public int Health = 50;
 
     [Header("Level")]
@@ -144,9 +144,9 @@ public class Character : MonoBehaviour
             OpenClose(menus[0]);
         }
 
-        // player.str = (int)Strength.BaseValue;
-        // player.hp = (int)HPandMP.BaseValue;
-        Debug.Log("여기" + Strength.Value);
+        player.str = (int)Strength.Value;
+        player.hp = (int)HPandMP.Value;
+        Debug.Log("여기" + (int)Strength.Value);
     }
 
     private int ChangeSlot()
@@ -270,9 +270,9 @@ public class Character : MonoBehaviour
 
     public void LevelUp()
     {
-        level++;
-        LevelUpStats();
-        CalculateRequiredExp();
+        // level++;
+        // LevelUpStats();
+        // CalculateRequiredExp();
         SkillPanel.CalculatePoint(level);
         statLvUp.CalculatePoint(level,this);
     }

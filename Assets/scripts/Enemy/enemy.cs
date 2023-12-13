@@ -95,10 +95,11 @@ public class enemy : MonoBehaviour
             curHealth -= weapon.damage;
             Debug.Log(player.level + "아야!" + curHealth);
             Debug.Log("enemyindex : " + enemyIndex);
-            Vector3 reactVec = transform.position - other.transform.position;
+            Vector3 reactVec = transform.position - weapon.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
-        if(other.GetComponent<PlayerSkill>()!=null){
+
+         if(other.GetComponent<PlayerSkill>()!=null){
             curHealth -= other.GetComponent<PlayerSkill>().damage;
             Vector3 reactVec = transform.position - other.transform.position;
             StartCoroutine(OnDamage(reactVec));
@@ -109,7 +110,6 @@ public class enemy : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        yield return new WaitForSeconds(0.1f);
         if (curHealth > 0)
         {
             anim.SetTrigger("doDamage");
@@ -120,8 +120,8 @@ public class enemy : MonoBehaviour
         }
         else
         {
-            anim.SetTrigger("doDie");
-            Destroy(gameObject, 1);
+            Destroy(gameObject);
         }
+        yield return null;
     }
 }

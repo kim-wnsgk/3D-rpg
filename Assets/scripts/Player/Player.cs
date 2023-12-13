@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    Character character;
+    public Character character;
     public float moveSpeed = 10.0f; // 이동 속도
     public GameObject[] weapons;  // Weapons들 저장
     public bool[] hasWeapons;  // 해당 인덱스 weapon 갖고 있는지
@@ -45,9 +45,9 @@ public class Player : MonoBehaviour
     public TrailRenderer trailRenderer;
 
     GameObject nearObject;
-    Weapon equipWeapon;
+    public Weapon equipWeapon;
     private float fireDelay = 1f;
-    private bool isFireReady = true;
+    public bool isFireReady = true;
 
     int weaponIndex = -1;
     private int comboStack = 0;
@@ -73,6 +73,12 @@ public class Player : MonoBehaviour
     public float healthRegenInterval = 1f;
     void Awake()
     {
+        str = 1;
+        hp =1;
+        mp = 1;
+        //삭제 해야됨. 
+
+
         zSkillCool = 10;
         zSkill = -10;
         anim = GetComponent<Animator>();
@@ -154,7 +160,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Debug.Log("player",str);
+        Debug.Log(str);
         FreezeRotation();
         StopToWall();
     }
@@ -224,12 +230,15 @@ public class Player : MonoBehaviour
     }
     IEnumerator Slash()
     {
+        equipWeapon.trailEffect.enabled=true;
         anim.SetTrigger("slash");
         slashCollider.enabled = true;
         audioSource.clip = attack2;
         audioSource.Play();
         yield return new WaitForSeconds(1.3f);
         slashCollider.enabled = false;
+        equipWeapon.trailEffect.enabled=false;
+        equipWeapon.trailEffect.Clear();
     }
     void Jump()
     {
@@ -333,7 +342,7 @@ public class Player : MonoBehaviour
         if (other.tag == "Enemy" && equipWeapon && !isFireReady)  // 공격
         {
             enemy enemy = other.GetComponent<enemy>();
-            enemy.curHealth -= (equipWeapon.damage + level);  // 레벨에 따라 추가데미지
+            enemy.curHealth -= (equipWeapon.damage);  // 레벨에 따라 추가데미지
             Debug.Log("Enemy's health : " + enemy.curHealth);
 
             if (enemy.curHealth > 0)  // 적이 죽지 않고 공격 당할때
@@ -387,6 +396,7 @@ public class Player : MonoBehaviour
                 enemy.anim.SetTrigger("doDie");
                 Destroy(enemy.gameObject, 0);
                 exp += enemy.exp;  // 경험치 쌓임
+                coin += enemy.exp;
             }
         }
         if (other.tag == "bullet")

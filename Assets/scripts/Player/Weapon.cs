@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    
+
     // public int originDamage = 1;
+    
     public int damage = 2;
     public float rate = 0.5f;
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
-
     void Start()
     {
         // damage = 0;
+        
     }
     public void Use()
     {
@@ -23,6 +24,8 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Swing()
     {
+        Player obj2 = GameObject.FindWithTag("Player").GetComponent<Player>();
+        damage = 2 + obj2.str*2;
         // damage = originDamage;
         yield return new WaitForSeconds(0.1f);
 
