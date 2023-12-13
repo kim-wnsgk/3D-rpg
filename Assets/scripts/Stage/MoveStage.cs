@@ -24,7 +24,7 @@ public class MoveStage : MonoBehaviour
     }
     public void school()
     {
-        player.health = 100;
+        player.health = player.maxHealth;
         LoadingManager.LoadScene("school");
     }
 

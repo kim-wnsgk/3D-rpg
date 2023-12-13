@@ -63,6 +63,9 @@ public class Player : MonoBehaviour
     public AudioClip attack2;
     public AudioSource audioSource;
 
+
+    private float healthRegenTimer = 0f;
+    public float healthRegenInterval = 1f;
     void Awake()
     {
         zSkillCool = 10;
@@ -101,6 +104,7 @@ public class Player : MonoBehaviour
         {
             zSkill = Time.time;
             StartCoroutine(Slash());
+            mana -= 10;
         }
         Jump();
         Attack();
@@ -118,6 +122,25 @@ public class Player : MonoBehaviour
         if (transform.position.y < -10.2f)
         {
             transform.position = new Vector3(0f, 0f, 0f);
+        }
+
+
+        healthRegenTimer += Time.deltaTime;
+        if (healthRegenTimer >= healthRegenInterval)
+        {
+            if (health < maxHealth)
+            {
+                health += level;
+                if (health > maxHealth)
+                    health = maxHealth;
+            }
+            if (mana < maxMana)
+            {
+                mana += level;
+                if (mana > maxMana)
+                    mana = maxMana;
+            }
+            healthRegenTimer = 0f;  // 타이머 초기화
         }
     }
 
@@ -364,7 +387,8 @@ public class Player : MonoBehaviour
             Vector3 reactVec = transform.position - enemy.transform.position;
             StartCoroutine(OnDamage(reactVec));
         }
-        if(other.tag =="EnemyWeapon"){
+        if (other.tag == "EnemyWeapon")
+        {
             BossMissile enemy = other.GetComponent<BossMissile>();
             health -= enemy.damage;
             Vector3 reactVec = transform.position - enemy.transform.position;

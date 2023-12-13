@@ -67352,8 +67352,76 @@ PrefabInstance:
       value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 6190655989270630152, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_Size.z
+      value: 0.18182184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190655989270630152, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.00000002994424
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190655989270630152, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0000000387078
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190655989270630152, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.016841363
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190655989270630152, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387838954693558049, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 155.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.71261746
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5786563
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.37708503
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.123045385
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -66.566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -83.368
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389653413808817625, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 41.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: mana
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: health
@@ -67367,6 +67435,10 @@ PrefabInstance:
       propertyPath: attack2
       value: 
       objectReference: {fileID: 8300000, guid: ddc6dc870f867754596e6a230d34c4ac, type: 3}
+    - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
+      propertyPath: maxMana
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8781729762367995279, guid: 838788beb6d5445ea9919e6c1c414a9c, type: 3}
       propertyPath: runSound
       value: 
