@@ -17,7 +17,6 @@ public class SkillLevelUp : MonoBehaviour
 
     public void CalculatePoint(int level)
     {
-        
         if (level == 1)
         {
             points = 5;
@@ -26,12 +25,8 @@ public class SkillLevelUp : MonoBehaviour
         else
         {
             points += levelConfig.GetSP(level);
-            
         }
-
-
         UpdateTalentPointText();
-        
     }
     public Skill[] MyTalents
     {

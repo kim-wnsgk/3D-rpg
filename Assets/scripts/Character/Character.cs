@@ -273,8 +273,8 @@ public class Character : MonoBehaviour
         // level++;
         // LevelUpStats();
         // CalculateRequiredExp();
-        SkillPanel.CalculatePoint(level);
-        statLvUp.CalculatePoint(level,this);
+        SkillPanel.CalculatePoint(player.level);
+        statLvUp.CalculatePoint(player.level,this);
     }
 
     public void CalculateRequiredExp()
@@ -438,10 +438,10 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Levelup()
-    {
+    // public void Levelup()
+    // {
 
-    }
+    // }
 
     public void Unequip(EquippableItem item)
     {
